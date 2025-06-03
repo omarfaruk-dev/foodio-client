@@ -1,7 +1,7 @@
 import { use } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useLocation } from "react-router";
-import Spinner from "../components/ui/Spinner";
+import Spinner from "../pages/shared/Spinner";
 
 const PrivateRoutes = ({children}) => {
 

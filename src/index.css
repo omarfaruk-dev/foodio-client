@@ -13,11 +13,24 @@
     --color-base-300: #E7E7E7;
     --color-accent: #706F6F;
   }
+@plugin "daisyui/theme" {
+    name: "dark";
+    default: true;
+    --color-primary: #00D0FD; 
+    --color-secondary: #7B9DFF;
+    --color-base-100: #0F172A;
+    --color-base-300: #E7E7E7;
+    --color-accent: ##f8faff;
+  }
 
   * {
     font-family: "Poppins", sans-serif;
   }
 
-  a.active {
-    @apply bg-base-300;
-  }
+a.active {
+  @apply text-secondary;
+}
+
+/* a.active {
+  color: #E83935;
+} */
