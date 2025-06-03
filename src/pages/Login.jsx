@@ -112,7 +112,7 @@ const Login = () => {
 
     return (
         <div className="mt-16 max-w-5xl py-10 md:py-20 mx-auto flex flex-col md:flex-row">
-            <title>Roomly | User SignIn</title>
+            <title>Foodio | User SignIn</title>
             {/* Left Column Image */}
             <div className="flex-1 flex items-center justify-center p-4 w-11/12 lg:w-full mx-auto">
                 <DotLottieReact
@@ -124,8 +124,8 @@ const Login = () => {
 
             {/* Right Column (Form) */}
             <div className="flex-1 w-full flex items-center justify-center p-4 md:p-8">
-                <div className="w-full max-w-md border-2 p-4 md:p-6 lg:p-8 rounded-lg border-secondary/30 shadow-md">
-                    <h2 className="text-3xl font-bold mb-6 text-center">Sign In</h2>
+                <div className="w-full max-w-md border-2 p-4 md:p-6 lg:p-8 rounded-xl border-secondary/30 shadow-md">
+                    <h2 className="text-primary text-3xl font-bold mb-6 text-center">Sign In</h2>
 
                     <form
                         onSubmit={handleSignin}
@@ -139,7 +139,7 @@ const Login = () => {
                                 type="email"
                                 name="email"
                                 placeholder="you@example.com"
-                                className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                                 onFocus={() => setError('')}
                             />
                         </div>
@@ -154,7 +154,7 @@ const Login = () => {
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     placeholder="Type Your Password"
-                                    className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary pr-10"
+                                    className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary pr-10"
                                     // autoComplete="current-password"
                                     onFocus={() => setError('')}
                                 />
@@ -171,8 +171,8 @@ const Login = () => {
                         {error && <p className='text-red-500'>✗ {error}</p>}
 
                         {/* Sign In Button */}
-                        <button className="btn btn-secondary text-white w-full rounded-md mt-4">
-                            Sign In
+                        <button className="btn btn-secondary text-white w-full rounded-3xl mt-4">
+                            Log In
                         </button>
                     </form>
 
@@ -188,7 +188,7 @@ const Login = () => {
                     </button>
 
                     {/* Sign Up Link */}
-                    <p className="mt-4 text-center text-sm text-gray-500">
+                    <p className="mt-4 text-center text-sm text-accent">
                         Don’t have an account?{" "}
                         <Link to="/signup" className="text-secondary hover:underline font-medium">
                             Sign up

@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import logo from '/logo.png';
-import { FaMoon, FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages } from 'react-icons/fa';
-import { Link, NavLink } from 'react-router';
+import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages } from 'react-icons/fa';
+import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import ThemeToggle from '../../components/ThemeToggle';
 
 const NavBar = () => {
-    const {user} = useAuth();
+    const { user, logOut } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
 
     const links =
         <>
             <NavLink className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaHome /> Home</NavLink>
             <NavLink to='/all-foods' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaUtensils /> All Foods</NavLink>
-            <NavLink className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaImages /> Gallery</NavLink>
+            <NavLink to='/gallery' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaImages /> Gallery</NavLink>
         </>
 
     return (
@@ -36,25 +45,36 @@ const NavBar = () => {
                             <ThemeToggle />
                         </button>
                         {user ? (
-                            <div className="relative">
+                            <>
+                                <div className="relative">
+                                    <button
+                                        className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-1 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
+                                        onClick={() => setUserMenuOpen((prev) => !prev)}
+                                    >
+                                        <img src={user.photoURL} alt="" className='w-8 rounded-full'/>
+                                    </button>
+                                    {userMenuOpen && (
+                                        <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50">
+                                            <div className="px-4 py-2 font-medium text-primary border-b border-secondary/20">{user.displayName}</div>
+                                            <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary">
+                                                My Foods
+                                            </NavLink>
+                                            <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary">
+                                                add Foods
+                                            </NavLink>
+                                            <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary">
+                                                My Orders
+                                            </NavLink>
+                                        </div>
+                                    )}
+                                </div>
                                 <button
-                                    className="ml-2 bg-base-100 border-2 border-secondary/20 text-primary p-2 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
-                                    onClick={() => setUserMenuOpen((prev) => !prev)}
+                                    onClick={handleLogout}
+                                    className="hidden md:inline-flex items-center justify-center btn btn-secondary text-base-100 rounded-3xl transition h-10 px-6 ml-2"
                                 >
-                                    <FaCode size={22} />
+                                    Log Out
                                 </button>
-                                {userMenuOpen && (
-                                    <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50">
-                                        <div className="px-4 py-2 font-medium text-primary border-b border-secondary/20">{user.name}</div>
-                                        <button className="flex items-center w-full px-4 py-2 text-primary hover:bg-base-100">
-                                            <FaUser className="mr-2" /> Profile
-                                        </button>
-                                        <button className="flex items-center w-full px-4 py-2 text-primary hover:bg-base-100">
-                                            <FaSignOutAlt className="mr-2" /> Logout
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
+                            </>
                         ) : (
                             <Link to='/login' className="hidden md:inline-flex items-center justify-center btn btn-secondary text-base-100 rounded-3xl transition h-10 px-6">Log In</Link>
                         )}
@@ -98,17 +118,12 @@ const NavBar = () => {
                     </ul>
                     <div className="flex flex-col gap-2 mt-4 border-t border-secondary/20 pt-2">
                         {user ? (
-                            <>
-                                <div className="px-2 py-1 font-semibold text-primary border-b border-secondary/20 flex items-center gap-2">
-                                    {user.name}
-                                </div>
-                                <button className="flex items-center px-4 py-2 text-primary hover:bg-base-100">
-                                    <FaUser className="mr-2" /> Profile
-                                </button>
-                                <button className="flex items-center px-4 py-2 text-primary hover:bg-base-100">
-                                    <FaSignOutAlt className="mr-2" /> Logout
-                                </button>
-                            </>
+                            <button
+                                onClick={handleLogout}
+                                className="flex items-center justify-center border border-secondary/20 text-primary px-4 py-1 rounded-lg font-medium hover:bg-base-100 transition h-10"
+                            >
+                                Log Out
+                            </button>
                         ) : (
                             <Link to='/login' className="flex items-center justify-center border border-secondary/20 text-primary px-4 py-1 rounded-lg font-medium hover:bg-base-100 transition h-10">Log In</Link>
                         )}
