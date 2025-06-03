@@ -55,7 +55,7 @@ const NavBar = () => {
                                     </button>
                                     {userMenuOpen && (
                                         <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50">
-                                            <div className="px-4 py-2 font-medium text-primary border-b border-secondary/20">{user.displayName}</div>
+                                            <Link to='/my-profile' className="px-4 py-2 font-medium text-primary border-b border-secondary/20">{user.displayName}</Link>
                                             <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary">
                                                 My Foods
                                             </NavLink>
@@ -111,7 +111,7 @@ const NavBar = () => {
                             <FaTimes size={22} />
                         </button>
                     </div>
-                    <ul className="flex flex-col gap-1">
+                    <ul className="flex flex-col gap-4">
                         {React.Children.map(links.props.children, (link, idx) => (
                             <li key={idx}>{link}</li>
                         ))}
@@ -120,7 +120,7 @@ const NavBar = () => {
                         {user ? (
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center justify-center border border-secondary/20 text-primary px-4 py-1 rounded-lg font-medium hover:bg-base-100 transition h-10"
+                                className="flex items-center justify-center btn btn-secondary text-white px-4 py-1 rounded-full font-medium hover:bg-base-100 transition h-10"
                             >
                                 Log Out
                             </button>

@@ -5,6 +5,8 @@ import Home from "../pages/home/Home";
 import Login from "../pages/Login";
 import AllFoods from "../pages/AllFoods/AllFoods";
 import SignUp from "../pages/SignUp";
+import MyProfile from "../pages/MyProfile";
+import AddFoodsForm from "../pages/AddFoods/AddFoodsForm";
 
 
 const router = createBrowserRouter([
@@ -25,8 +27,16 @@ const router = createBrowserRouter([
                 Component: SignUp,
             },
             {
+                path: 'my-profile',
+                Component: MyProfile,
+            },
+            {
                 path: '/all-foods',
                 Component: AllFoods,
+            },
+            {
+                path: 'add-foods',
+                element: <AddFoodsForm/>,
             },
             {
                 path: '/contact',
