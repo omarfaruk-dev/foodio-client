@@ -45,7 +45,7 @@ const AddFoodsForm = () => {
         newFood.ingredients = newFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
 
         //send to db (update endpoint as needed)
-        fetch('https://roomly-server.vercel.app/foods', {
+        fetch('http://localhost:3000/foods', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -134,34 +134,47 @@ const AddFoodsForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-primary mb-1">Category</label>
-                        <input
-                            type="text"
-                            name="food_category"
-                            placeholder="e.g. Main Course, Dessert, Snack"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
-                            onChange={handleFieldChange}
-                        />
+                        <div className="flex flex-wrap gap-4">
+                            {['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Vegan', 'Snacks'].map((cat) => (
+                                <label key={cat} className="flex items-center gap-2 text-accent font-normal">
+                                    <input
+                                        type="checkbox"
+                                        name="food_category"
+                                        value={cat}
+                                        className="checkbox checkbox-xs checkbox-secondary"
+                                        onChange={handleFieldChange}
+                                    />
+                                    <span>{cat}</span>
+                                </label>
+                            ))}
+                        </div>
                         {errors.food_category && <p className="text-error text-xs mt-1">{errors.food_category}</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-primary mb-1">Food Origin</label>
-                        <select
-                            name="food_origin"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
-                            onChange={handleFieldChange}
-                        >
-                            <option value="">Select Origin</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="India">India</option>
-                            <option value="Italy">Italy</option>
-                            <option value="USA">USA</option>
-                            <option value="China">China</option>
-                            <option value="France">France</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Thailand">Thailand</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Other">Other</option>
-                        </select>
+                        <div className='relative'>
+
+                            <select
+                                name="food_origin"
+                                className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                                onChange={handleFieldChange}
+                            >
+                                <option value="">Select Origin</option>
+                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="India">India</option>
+                                <option value="Italy">Italy</option>
+                                <option value="USA">USA</option>
+                                <option value="China">China</option>
+                                <option value="France">France</option>
+                                <option value="Japan">Japan</option>
+                                <option value="Thailand">Thailand</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-accent">
+                                <FaChevronDown className="text-sm" />
+                            </div>
+                        </div>
                         {errors.food_origin && <p className="text-error text-xs mt-1">{errors.food_origin}</p>}
                     </div>
                 </div>
@@ -246,6 +259,19 @@ const AddFoodsForm = () => {
                             className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                         />
                     </div>
+                </div>
+                {/* Purchase, default 0) */}
+                <div className="md:col-span-2 hidden">
+                    <label className="block font-medium mb-1">
+                        Purchase Count (default: 0)
+                    </label>
+                    <input
+                        type="number"
+                        name="purchase_count"
+                        value={0}
+                        readOnly
+                        className="input-base cursor-not-allowed"
+                    />
                 </div>
                 {/* Submit */}
                 <div className="text-center">
