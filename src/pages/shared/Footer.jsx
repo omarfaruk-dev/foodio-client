@@ -1,5 +1,7 @@
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router";
+import logo from '/logo.png';
+
 
 const Footer = () => {
     return (
@@ -8,15 +10,15 @@ const Footer = () => {
                 {/* Brand & Mission */}
                 <div>
                     <div className="flex lg:items-center gap-2 mb-3">
-                        <img src="/logo-small.png" alt="Roomly Logo" className="w-8 h-8" />
-                        <span className="text-xl font-bold text-secondary">ROOMLY</span>
+                        <img src={logo} alt="Roomly Logo" className="w-30" />
+
                     </div>
-                    <p className="text-accent text-sm leading-relaxed mb-2">Roomly makes finding a safe, compatible roommate or room easy and secure. Built for trust, privacy, and real connections.</p>
+                    <p className="text-accent text-sm leading-relaxed mb-2">Foodio helps you discover great meals and manage your restaurant experience with ease and security.</p>
                 </div>
                 {/* Contact Section */}
                 <div>
                     <h3 className="text-lg font-semibold mb-2 text-primary">Contact</h3>
-                    <p className="mb-1">support@roomly.com</p>
+                    <p className="mb-1">support@foodio.com</p>
                     <p className="mb-1">+1 (800) 123-4567</p>
                     <p>123 Room St, WA, USA</p>
                 </div>
@@ -25,9 +27,8 @@ const Footer = () => {
                     <h3 className="text-lg font-semibold mb-2 text-primary">Quick Links</h3>
                     <ul className="space-y-1">
                         <li><Link to="/" className="hover:text-secondary">Home</Link></li>
-                        <li><Link to="/browse-listing" className="hover:text-secondary">Browse Listings</Link></li>
-                        <li><Link to="/add-roommate" className="hover:text-secondary">Add Roommate</Link></li>
-                        <li><Link to="/my-listing" className="hover:text-secondary">My Listings</Link></li>
+                        <li><Link to="/all-foods" className="hover:text-secondary">All Foods</Link></li>
+                        <li><Link to="/gallery" className="hover:text-secondary">Gallery</Link></li>
                     </ul>
                 </div>
                 {/* Social Media Section */}
@@ -48,7 +49,7 @@ const Footer = () => {
                     <Link to="/privacy-policy" className="hover:text-secondary underline">Privacy Policy</Link>
                 </div>
                 <div>
-                    © {new Date().getFullYear()} Roomly. All rights reserved.
+                    © {new Date().getFullYear()} Foodio. All rights reserved.
                 </div>
             </div>
         </footer>

@@ -41,9 +41,9 @@ const NavBar = () => {
                     </div>
                     {/* Actions */}
                     <div className="flex items-center space-x-3 relative">
-                        <button className="">
-                            <ThemeToggle />
-                        </button>
+                        {/* Theme Toggle button*/}
+                        <ThemeToggle />
+
                         {user ? (
                             <>
                                 <div className="relative">
@@ -51,7 +51,7 @@ const NavBar = () => {
                                         className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-1 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
                                         onClick={() => setUserMenuOpen((prev) => !prev)}
                                     >
-                                        <img src={user.photoURL} alt="" className='w-8 rounded-full'/>
+                                        <img src={user.photoURL} alt="" className='w-8 rounded-full' />
                                     </button>
                                     {userMenuOpen && (
                                         <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50">

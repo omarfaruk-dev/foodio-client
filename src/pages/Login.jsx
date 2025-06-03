@@ -9,7 +9,7 @@ import Spinner from "./shared/Spinner";
 
 const Login = () => {
 
-    const { user, signInUser, googleSignIn, setUser } = useAuth();
+    const { user, loginUser, googleSignIn, setUser } = useAuth();
 
 
     //use location for path
@@ -54,7 +54,7 @@ const Login = () => {
         const password = e.target.password.value;
 
         //signin user
-        signInUser(email, password)
+        loginUser(email, password)
             .then(userCredential => {
                 const currentUser = userCredential.user;
                 const userInfo = {
@@ -182,7 +182,7 @@ const Login = () => {
                     {/* Sign in with Google */}
                     <button
                         onClick={handleGoogleSignIn}
-                        className="btn btn-outline hover:bg-secondary/15 border-secondary w-full rounded">
+                        className="btn btn-outline hover:bg-secondary/15 border-secondary w-full rounded-3xl">
                         <FcGoogle />
                         Sign in with Google
                     </button>
@@ -190,7 +190,7 @@ const Login = () => {
                     {/* Sign Up Link */}
                     <p className="mt-4 text-center text-sm text-accent">
                         Don’t have an account?{" "}
-                        <Link to="/signup" className="text-secondary hover:underline font-medium">
+                        <Link to="/signup" className="text-secondary hover:underline font-medium rounded">
                             Sign up
                         </Link>
                     </p>
