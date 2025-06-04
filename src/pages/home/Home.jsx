@@ -1,11 +1,17 @@
 import React from 'react';
 import HeroSlider from './HeroSlider';
+import TopFoods from './TopFoods';
 
 const Home = () => {
     return (
-        <div>
-            <HeroSlider/>
-        </div>
+        <>
+            <section>
+                <HeroSlider />
+            </section>
+            <section>
+                <TopFoods />
+            </section>
+        </>
     );
 };
 

@@ -16,17 +16,18 @@ import hero5 from "../../assets/images/hero/hero-5.avif";
 import hero7 from "../../assets/images/hero/hero-7.jpg";
 import hero8 from "../../assets/images/hero/hero-8.jpg";
 import hero9 from "../../assets/images/hero/hero-9.jpg";
+import { Link } from "react-router";
 
 const HeroSlider = () => {
   const images = [
-    { src: hero1, title: "Beautiful Pas", subtitle: "Nature Behave" },
-    { src: hero2, title: "More Cream", subtitle: "Delicious Adventures" },
-    { src: hero3, title: "Natures Platter", subtitle: "Natural Organs" },
-    { src: hero4, title: "Ocean Breeze", subtitle: "Feel the waves" },
-    { src: hero5, title: "Desert Sunset", subtitle: "Golden horizons" },
-    { src: hero7, title: "Mix Salad", subtitle: "Salad Forever" },
-    { src: hero8, title: "Autumn", subtitle: "Seasonal Food" },
-    { src: hero9, title: "Chicken Leg", subtitle: "Spicy and Tasteful" },
+    { src: hero1, title: "Beautiful Pas", subtitle: "Experience the harmony of nature and taste in every bite." },
+    { src: hero2, title: "More Cream", subtitle: "Indulge in creamy delights and discover new dessert adventures." },
+    { src: hero3, title: "Natures Platter", subtitle: "A celebration of organic flavors, fresh from the earth to your plate." },
+    { src: hero4, title: "Ocean Breeze", subtitle: "Savor the freshness of the sea with every flavorful wave." },
+    { src: hero5, title: "Desert Sunset", subtitle: "Golden horizons and sweet treats inspired by the desert sun." },
+    { src: hero7, title: "Mix Salad", subtitle: "A vibrant medley of greens and veggies for a healthy lifestyle." },
+    { src: hero8, title: "Autumn", subtitle: "Seasonal harvests and cozy flavors to warm your soul." },
+    { src: hero9, title: "Chicken Leg", subtitle: "Juicy, spicy, and perfectly cooked for true food lovers." },
   ];
 
   return (
@@ -80,6 +81,12 @@ const HeroSlider = () => {
                 <p className="text-lg md:text-xl text-white/90 drop-shadow-lg">
                   {image.subtitle}
                 </p>
+                <Link
+                  to="/all-foods"
+                  className="inline-block mt-4 px-5 py-2 rounded-3xl btn btn-outline text-white font-semibold shadow hover:bg-secondary/90 transition-all duration-200 text-sm md:text-base"
+                >
+                  See More
+                </Link>
               </div>
             </div>
           </SwiperSlide>
