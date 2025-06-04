@@ -7,6 +7,8 @@ import AllFoods from "../pages/AllFoods/AllFoods";
 import SignUp from "../pages/SignUp";
 import MyProfile from "../pages/MyProfile";
 import AddFoodsForm from "../pages/AddFoods/AddFoodsForm";
+import FoodDetails from "../pages/FoodDetails";
+import Spinner from "../pages/shared/Spinner";
 
 
 const router = createBrowserRouter([
@@ -32,8 +34,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/all-foods',
-                loader: () =>fetch('http://localhost:3000/foods').then(res=>res.json()),
+                hydrateFallbackElement: <Spinner/>,
+                loader: () =>fetch('http://localhost:3000/foods'),
                 Component: AllFoods,
+            },
+            {
+                path: '/item-details/:id',
+                hydrateFallbackElement: <Spinner/>,
+                loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+                Component: FoodDetails,
+
             },
             {
                 path: 'add-foods',

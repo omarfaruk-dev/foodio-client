@@ -19,12 +19,14 @@ const AddFoodsForm = () => {
         const form = e.target;
         const formData = new FormData(form);
         const newFood = Object.fromEntries(formData.entries());
-
+        console.log(newFood);
         // Custom validation
         const newErrors = {};
         if (!newFood.food_name?.trim()) newErrors.food_name = 'Food name is required.';
         if (!newFood.food_img?.trim()) newErrors.food_img = 'Food image URL is required.';
-        if (!newFood.food_category?.trim()) newErrors.food_category = 'Category is required.';
+        // Fix: get all checked categories as array
+        const foodCategories = formData.getAll('food_category');
+        if (!foodCategories.length) newErrors.food_category = 'Category is required.';
         if (!newFood.quantity?.trim()) newErrors.quantity = 'Quantity is required.';
         if (!newFood.price?.trim()) newErrors.price = 'Price is required.';
         if (!newFood.food_origin?.trim()) newErrors.food_origin = 'Food origin is required.';
@@ -40,6 +42,9 @@ const AddFoodsForm = () => {
         // Add user info
         newFood.user_name = user.displayName;
         newFood.user_email = user.email;
+
+        // Fix: assign all checked categories as array
+        newFood.food_category = foodCategories;
 
         // Optionally, split ingredients into array
         newFood.ingredients = newFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
