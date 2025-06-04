@@ -18,6 +18,19 @@ const EditFood = () => {
         ingredients: Array.isArray(food.ingredients) ? food.ingredients.join(', ') : food.ingredients || '',
     });
 
+    // If the logged-in user is not the owner, show alert and go back on confirm
+    if (food.user_email !== user?.email) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Unauthorized',
+            text: 'You are not authorized to edit this food.',
+            confirmButtonText: 'OK',
+        }).then(() => {
+            navigate(-1);
+        });
+        return null;
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -42,8 +55,8 @@ const EditFood = () => {
         updatedFood.user_email = user.email;
         updatedFood.food_category = foodCategories;
         updatedFood.ingredients = updatedFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
-        // send to db (PUT or PATCH)
-        fetch(`${import.meta.env.VITE_API_URL}/foods/${food._id}`, {
+        // send to db (PUT with email query param)
+        fetch(`${import.meta.env.VITE_API_URL}/foods/${food._id}?email=${user.email}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -61,6 +74,15 @@ const EditFood = () => {
                         timer: 1500
                     });
                     navigate(-1);
+                } else if (data.matchedCount === 0) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Unauthorized",
+                        text: "You are not authorized to edit this food or it does not exist.",
+                        confirmButtonText: 'OK',
+                    }).then(() => {
+                        navigate(-1);
+                    });
                 }
             })
             .catch((err) => {
