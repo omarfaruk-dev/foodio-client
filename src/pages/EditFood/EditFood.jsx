@@ -4,92 +4,96 @@ import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
+import { useLoaderData } from 'react-router';
 
-const AddFoodsForm = () => {
-
+const EditFood = () => {
+    const food = useLoaderData();
     const { user } = useAuth();
-
     const navigate = useNavigate();
-
-    // Add state for custom error messages
     const [errors, setErrors] = useState({});
+    // Pre-fill form with food data
+    const [formState, setFormState] = useState({
+        ...food,
+        food_category: Array.isArray(food.food_category) ? food.food_category : [food.food_category],
+        ingredients: Array.isArray(food.ingredients) ? food.ingredients.join(', ') : food.ingredients || '',
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const newFood = Object.fromEntries(formData.entries());
-        console.log(newFood);
+        const updatedFood = Object.fromEntries(formData.entries());
         // Custom validation
         const newErrors = {};
-        if (!newFood.food_name?.trim()) newErrors.food_name = 'Food name is required.';
-        if (!newFood.food_img?.trim()) newErrors.food_img = 'Food image URL is required.';
-        // Fix: get all checked categories as array
+        if (!updatedFood.food_name?.trim()) newErrors.food_name = 'Food name is required.';
+        if (!updatedFood.food_img?.trim()) newErrors.food_img = 'Food image URL is required.';
         const foodCategories = formData.getAll('food_category');
         if (!foodCategories.length) newErrors.food_category = 'Category is required.';
-        if (!newFood.quantity?.trim()) newErrors.quantity = 'Quantity is required.';
-        if (!newFood.price?.trim()) newErrors.price = 'Price is required.';
-        if (!newFood.food_origin?.trim()) newErrors.food_origin = 'Food origin is required.';
-        if (!newFood.details?.trim()) newErrors.details = 'Details are required.';
-        if (!newFood.ingredients?.trim()) newErrors.ingredients = 'Ingredients are required.';
-        if (!newFood.making_procedure?.trim()) newErrors.making_procedure = 'Making procedure is required.';
-        if (!user?.displayName) newErrors.user_name = 'User name is required.';
-        if (!user?.email) newErrors.user_email = 'User email is required.';
-
+        if (!updatedFood.quantity?.trim()) newErrors.quantity = 'Quantity is required.';
+        if (!updatedFood.price?.trim()) newErrors.price = 'Price is required.';
+        if (!updatedFood.food_origin?.trim()) newErrors.food_origin = 'Food origin is required.';
+        if (!updatedFood.details?.trim()) newErrors.details = 'Details are required.';
+        if (!updatedFood.ingredients?.trim()) newErrors.ingredients = 'Ingredients are required.';
+        if (!updatedFood.making_procedure?.trim()) newErrors.making_procedure = 'Making procedure is required.';
         setErrors(newErrors);
         if (Object.keys(newErrors).length > 0) return;
-
         // Add user info
-        newFood.user_name = user.displayName;
-        newFood.user_email = user.email;
-        //food categories data
-        newFood.food_category = foodCategories;
-
-        // Split ingredients into array
-        newFood.ingredients = newFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
-
-        //send to db
-        fetch(`${import.meta.env.VITE_API_URL}/foods`, {
-            method: "POST",
+        updatedFood.user_name = user.displayName;
+        updatedFood.user_email = user.email;
+        updatedFood.food_category = foodCategories;
+        updatedFood.ingredients = updatedFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
+        // send to db (PUT or PATCH)
+        fetch(`${import.meta.env.VITE_API_URL}/foods/${food._id}`, {
+            method: "PUT",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newFood)
+            body: JSON.stringify(updatedFood)
         })
             .then(res => res.json())
             .then(data => {
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Food Added Successfully!",
+                        title: "Food Updated Successfully!",
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    form.reset();
+                    navigate(-1);
                 }
             })
             .catch((err) => {
-                console.error("Error Saving Food Data:", err);
+                console.error("Error Updating Food Data:", err);
                 Swal.fire({
                     title: "Error!",
-                    text: "Something went wrong!",
+                    text: `Something went wrong! ${err.message}`,
                     icon: "error",
                 });
             })
     }
 
-    // Reset error for a field on change
     const handleFieldChange = (e) => {
-        const { name } = e.target;
+        const { name, value, type, checked } = e.target;
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: undefined }));
+        }
+        if (type === 'checkbox') {
+            let newCategories = [...formState.food_category];
+            if (checked) {
+                newCategories.push(value);
+            } else {
+                newCategories = newCategories.filter(cat => cat !== value);
+            }
+            setFormState(prev => ({ ...prev, food_category: newCategories }));
+        } else {
+            setFormState(prev => ({ ...prev, [name]: value }));
         }
     };
 
     return (
         <div className="mt-16 max-w-4xl mx-auto px-4 py-10 md:py-20">
-            <title>Add New Food | Foodio</title>
+            <title>Edit Food | Foodio</title>
             <div className='flex justify-between items-center py-5'>
                 <button onClick={() => navigate(-1)} className="flex btn btn-secondary btn-outline btn-sm text-sm font-medium">
                     <FaArrowLeft /> Go Back
@@ -104,10 +108,10 @@ const AddFoodsForm = () => {
                 noValidate
             >
                 <h2 className="flex items-center justify-center gap-2 text-center text-2xl text-primary md:text-3xl font-bold mb-2">
-                    Add <span className="text-secondary">Food </span> <IoFastFoodOutline className='text-secondary' />
+                    Edit <span className="text-secondary">Food </span> <IoFastFoodOutline className='text-secondary' />
                 </h2>
                 <p className="text-center text-accent mb-12 max-w-2xl mx-auto">
-                    Fill out the form below to add a new food item to Foodio. All fields are required for accurate listing and better management.
+                    Update the form below to edit this food item. All fields are required for accurate listing and better management.
                 </p>
                 {/* Food Name & Image URL in one row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -116,6 +120,7 @@ const AddFoodsForm = () => {
                         <input
                             type="text"
                             name="food_name"
+                            value={formState.food_name || ''}
                             placeholder="e.g. Chicken Biryani"
                             className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
@@ -127,6 +132,7 @@ const AddFoodsForm = () => {
                         <input
                             type="url"
                             name="food_img"
+                            value={formState.food_img || ''}
                             placeholder="https://example.com/food.jpg"
                             className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
@@ -145,6 +151,7 @@ const AddFoodsForm = () => {
                                         type="checkbox"
                                         name="food_category"
                                         value={cat}
+                                        checked={formState.food_category.includes(cat)}
                                         className="checkbox checkbox-xs checkbox-secondary"
                                         onChange={handleFieldChange}
                                     />
@@ -157,9 +164,9 @@ const AddFoodsForm = () => {
                     <div>
                         <label className="block text-sm font-medium text-primary mb-1">Food Origin</label>
                         <div className='relative'>
-
                             <select
                                 name="food_origin"
+                                value={formState.food_origin || ''}
                                 className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                                 onChange={handleFieldChange}
                             >
@@ -189,6 +196,7 @@ const AddFoodsForm = () => {
                         <input
                             type="number"
                             name="quantity"
+                            value={formState.quantity || ''}
                             placeholder="e.g. 10"
                             className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
@@ -200,6 +208,7 @@ const AddFoodsForm = () => {
                         <input
                             type="number"
                             name="price"
+                            value={formState.price || ''}
                             placeholder="e.g. 15"
                             className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
@@ -213,6 +222,7 @@ const AddFoodsForm = () => {
                     <textarea
                         rows={8}
                         name="details"
+                        value={formState.details || ''}
                         className="input h-30 input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
                         placeholder="Describe the food, taste, etc."
                         onChange={handleFieldChange}
@@ -224,6 +234,7 @@ const AddFoodsForm = () => {
                     <input
                         type="text"
                         name="ingredients"
+                        value={formState.ingredients || ''}
                         placeholder="e.g. Rice, Chicken, Spices"
                         className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
                         onChange={handleFieldChange}
@@ -235,6 +246,7 @@ const AddFoodsForm = () => {
                     <textarea
                         rows={12}
                         name="making_procedure"
+                        value={formState.making_procedure || ''}
                         className="input input-bordered h-30 w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
                         placeholder="Step by step procedure..."
                         onChange={handleFieldChange}
@@ -272,7 +284,7 @@ const AddFoodsForm = () => {
                     <input
                         type="number"
                         name="purchase_count"
-                        value={0}
+                        value={formState.purchase_count || 0}
                         readOnly
                         className="input-base cursor-not-allowed"
                     />
@@ -283,7 +295,7 @@ const AddFoodsForm = () => {
                         type="submit"
                         className="btn btn-secondary text-base-100 px-6 py-2 rounded-md hover:bg-opacity-90 transition duration-300"
                     >
-                        <FaPlus /> Add Food
+                        <FaPlus /> Update Food
                     </button>
                 </div>
             </form>
@@ -291,4 +303,4 @@ const AddFoodsForm = () => {
     );
 };
 
-export default AddFoodsForm;
+export default EditFood;

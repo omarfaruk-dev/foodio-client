@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import coverImg from '../../assets/images/header/food-bg3.jpg'
-import { Link } from 'react-router';
 import FoodCard from './FoodCard';
 const AllFoods = () => {
 
@@ -8,7 +7,7 @@ const AllFoods = () => {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:3000/foods?search=${search}`)
+        fetch(`${import.meta.env.VITE_API_URL}/foods?search=${search}`)
             .then((res) => res.json())
             .then((data) => setItems(data));
     }, [search]);

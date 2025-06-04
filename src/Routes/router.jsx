@@ -10,6 +10,7 @@ import AddFoodsForm from "../pages/AddFoods/AddFoodsForm";
 import FoodDetails from "../pages/FoodDetails";
 import Spinner from "../pages/shared/Spinner";
 import MyFoods from "../pages/MyFoods/MyFoods";
+import EditFood from "../pages/EditFood/EditFood";
 
 
 const router = createBrowserRouter([
@@ -36,13 +37,13 @@ const router = createBrowserRouter([
             {
                 path: '/all-foods',
                 hydrateFallbackElement: <Spinner/>,
-                loader: () =>fetch('http://localhost:3000/foods'),
+                loader: () =>fetch(`${import.meta.env.VITE_API_URL}/foods`),
                 Component: AllFoods,
             },
             {
                 path: '/item-details/:id',
                 hydrateFallbackElement: <Spinner/>,
-                loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
                 Component: FoodDetails,
 
             },
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
             {
                 path: 'add-foods',
                 element: <AddFoodsForm/>,
+            },
+            {
+                path: '/edit-food/:id',
+                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
+                element: <EditFood/>
             },
             {
                 path: '/contact',
