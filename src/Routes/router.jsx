@@ -9,6 +9,7 @@ import MyProfile from "../pages/MyProfile";
 import AddFoodsForm from "../pages/AddFoods/AddFoodsForm";
 import FoodDetails from "../pages/FoodDetails";
 import Spinner from "../pages/shared/Spinner";
+import MyFoods from "../pages/MyFoods/MyFoods";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
                 Component: FoodDetails,
 
+            },
+            {
+                path: 'my-foods',
+                element: <MyFoods/>           
             },
             {
                 path: 'add-foods',
