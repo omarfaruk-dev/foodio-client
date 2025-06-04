@@ -13,10 +13,10 @@ const TopFoods = () => {
     }, []);
 
     return (
-        <>
-            <section className="max-w-7xl mx-auto px-4 py-16">
+        <div className='max-w-7xl mx-auto px-4 pb-10 md:pb-16 lg:pb-20'>
+            <div className="">
                 <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
-                    Top <span className="text-secondary">Foods</span> This Week
+                    Top <span className="text-secondary border-b-2 border-secondary">Foods</span> This Week
                 </h2>
                 <p className="text-center text-accent mb-10 max-w-2xl mx-auto">
                     Discover the most popular foods, loved by our community! These dishes have the highest purchase counts and are trending right now. Try them and taste why everyone is talking!
@@ -34,13 +34,13 @@ const TopFoods = () => {
                         ))}
                     </div>
                 )}
-            </section>
-            <div className="flex justify-center">
+            </div>
+            <div className="flex justify-center mt-10">
                 <a href="/all-foods" className="btn btn-outline btn-secondary px-8 py-2 rounded-3xl font-semibold text-secondary hover:bg-secondary hover:scale-102 hover:text-white hover:-translate-y-2 duration-700 transition-all">
                     See More Foods
                 </a>
             </div>
-        </>
+        </div>
     );
 };
 
