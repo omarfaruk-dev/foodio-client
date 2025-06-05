@@ -27,10 +27,24 @@ const NavBar = () => {
             <NavLink to='/gallery' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaImages /> Gallery</NavLink>
         </>
 
+    const navRef = React.useRef();
+
+    // Close user menu when clicking outside
+    React.useEffect(() => {
+        if (!userMenuOpen) return;
+        function handleClick(e) {
+            if (navRef.current && !navRef.current.contains(e.target)) {
+                setUserMenuOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClick);
+        return () => document.removeEventListener('mousedown', handleClick);
+    }, [userMenuOpen]);
+
     return (
-        <nav className="bg-secondary/8 border-b border-secondary/20 w-full z-50">
+        <nav ref={navRef} className="fixed top-0 left-0 bg-base-100/90 border-b border-secondary/20 w-full z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16 items-center">
+                <div className="flex justify-between h-16 items-center w-full">
                     {/* Logo */}
                     <div className="flex items-center">
                         <img src={logo} alt="Foodio Logo" className="w-30 mr-2" />
@@ -51,22 +65,28 @@ const NavBar = () => {
                                         className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-1 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
                                         onClick={() => setUserMenuOpen((prev) => !prev)}
                                     >
-                                        <img src={user.photoURL} alt="" className='w-8 rounded-full' />
+                                        {user.photoURL ? (
+                                            <img src={user.photoURL} alt="" className='w-8 rounded-full' />
+                                        ) : (
+                                            <FaUser className="w-8 h-8 text-secondary" />
+                                        )}
                                     </button>
-                                    {userMenuOpen && (
-                                        <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50">
-                                            <Link to='/my-profile' className="px-4 py-2 font-medium text-primary border-b border-secondary/20">{user.displayName}</Link>
-                                            <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary">
-                                                My Foods
-                                            </NavLink>
-                                            <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary">
-                                                add Foods
-                                            </NavLink>
-                                            <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary">
-                                                My Orders
-                                            </NavLink>
-                                        </div>
-                                    )}
+                                    <div
+                                        className={`absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${userMenuOpen ? 'opacity-100 scale-100 pointer-events-auto visible' : 'opacity-0 scale-95 pointer-events-none invisible'}`}
+                                        style={{ minWidth: '12rem' }}
+                                        aria-hidden={!userMenuOpen}
+                                    >
+                                        <Link to='/my-profile' className="px-4 py-2 font-medium text-primary border-b border-secondary/20" onClick={() => setUserMenuOpen(false)}>{user.displayName}</Link>
+                                        <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
+                                            My Foods
+                                        </NavLink>
+                                        <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
+                                            add Foods
+                                        </NavLink>
+                                        <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
+                                            My Orders
+                                        </NavLink>
+                                    </div>
                                 </div>
                                 <button
                                     onClick={handleLogout}
@@ -94,12 +114,12 @@ const NavBar = () => {
             >
                 {/* Overlay */}
                 <div
-                    className={`absolute inset-0 bg-transparent transition-opacity duration-300 ${menuOpen ? 'bg-opacity-30' : 'bg-opacity-0'}`}
+                    className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                     onClick={() => setMenuOpen(false)}
                 />
                 {/* Sidebar */}
                 <div
-                    className={`relative bg-base-100 border-r border-secondary/20 w-64 h-full px-4 pb-4 pt-6 shadow-lg transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+                    className={`fixed bg-base-100 border-r border-secondary/20 w-64 h-full px-4 pb-4 pt-6 shadow-lg transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
                     onClick={e => e.stopPropagation()}
                 >
                     <div className="flex justify-between items-center mb-4">
