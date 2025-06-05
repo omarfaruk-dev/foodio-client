@@ -96,16 +96,16 @@ const AddFoodsForm = () => {
         <div className="mt-16 max-w-4xl mx-auto px-4 py-10 md:py-20">
             <title>Add New Food | Foodio</title>
             <div className='flex justify-between items-center py-5'>
-                <button onClick={() => navigate(-1)} className="flex btn btn-secondary btn-outline btn-sm text-sm font-medium">
+                <button onClick={() => navigate(-1)} className="flex btn btn-secondary btn-outline btn-sm rounded-3xl text-sm font-medium">
                     <FaArrowLeft /> Go Back
                 </button>
-                <Link to='/all-foods' className="flex btn btn-secondary btn-outline btn-sm text-sm font-medium">
+                <Link to='/all-foods' className="flex btn btn-secondary btn-outline btn-sm rounded-3xl text-sm font-medium">
                     View All <FaList />
                 </Link>
             </div>
             <form
                 onSubmit={handleSubmit}
-                className="space-y-6 bg-secondary/2 shadow-md rounded-md p-6 border-2 border-secondary/30"
+                className="space-y-6 bg-secondary/2 shadow-md rounded-xl p-6 border-2 border-secondary/30"
                 noValidate
             >
                 <h2 className="flex items-center justify-center gap-2 text-center text-2xl text-primary md:text-3xl font-bold mb-2">
@@ -122,7 +122,7 @@ const AddFoodsForm = () => {
                             type="text"
                             name="food_name"
                             placeholder="e.g. Chicken Biryani"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
                         />
                         {errors.food_name && <p className="text-error text-xs mt-1">{errors.food_name}</p>}
@@ -133,7 +133,7 @@ const AddFoodsForm = () => {
                             type="url"
                             name="food_img"
                             placeholder="https://example.com/food.jpg"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
                         />
                         {errors.food_img && <p className="text-error text-xs mt-1">{errors.food_img}</p>}
@@ -165,7 +165,7 @@ const AddFoodsForm = () => {
 
                             <select
                                 name="food_origin"
-                                className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                                 onChange={handleFieldChange}
                             >
                                 <option value="">Select Origin</option>
@@ -195,7 +195,7 @@ const AddFoodsForm = () => {
                             type="number"
                             name="quantity"
                             placeholder="e.g. 10"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
                         />
                         {errors.quantity && <p className="text-error text-xs mt-1">{errors.quantity}</p>}
@@ -206,7 +206,7 @@ const AddFoodsForm = () => {
                             type="number"
                             name="price"
                             placeholder="e.g. 15"
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                             onChange={handleFieldChange}
                         />
                         {errors.price && <p className="text-error text-xs mt-1">{errors.price}</p>}
@@ -218,7 +218,7 @@ const AddFoodsForm = () => {
                     <textarea
                         rows={8}
                         name="details"
-                        className="input h-30 input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
+                        className="input h-30 input-bordered w-full py-2 rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
                         placeholder="Describe the food, taste, etc."
                         onChange={handleFieldChange}
                     ></textarea>
@@ -230,7 +230,7 @@ const AddFoodsForm = () => {
                         type="text"
                         name="ingredients"
                         placeholder="e.g. Rice, Chicken, Spices"
-                        className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                        className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                         onChange={handleFieldChange}
                     />
                     {errors.ingredients && <p className="text-error text-xs mt-1">{errors.ingredients}</p>}
@@ -240,7 +240,7 @@ const AddFoodsForm = () => {
                     <textarea
                         rows={12}
                         name="making_procedure"
-                        className="input input-bordered h-30 w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
+                        className="input input-bordered h-30 w-full py-2 rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
                         placeholder="Step by step procedure..."
                         onChange={handleFieldChange}
                     ></textarea>
@@ -255,7 +255,7 @@ const AddFoodsForm = () => {
                             name="user_name"
                             value={user?.displayName}
                             readOnly
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                         />
                     </div>
                     <div>
@@ -265,7 +265,7 @@ const AddFoodsForm = () => {
                             name="user_email"
                             value={user?.email}
                             readOnly
-                            className="input input-bordered w-full rounded-md focus:outline-none focus:ring-1 focus:ring-secondary"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                         />
                     </div>
                 </div>
@@ -279,14 +279,14 @@ const AddFoodsForm = () => {
                         name="purchase_count"
                         value={0}
                         readOnly
-                        className="input-base cursor-not-allowed"
+                        className="input-base cursor-not-allowed rounded-3xl"
                     />
                 </div>
                 {/* Submit */}
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="btn btn-secondary text-base-100 px-6 py-2 rounded-md hover:bg-opacity-90 transition duration-300"
+                        className="btn btn-secondary text-white px-6 py-2 rounded-3xl hover:bg-opacity-90 transition duration-300"
                     >
                         <FaPlus /> Add Food
                     </button>

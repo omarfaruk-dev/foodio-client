@@ -65,11 +65,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/edit-food/:id',
+                hydrateFallbackElement: <Spinner />,
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
                 element: <PrivateRoutes> <EditFood /> </PrivateRoutes>
             },
             {
                 path: '/food-purchase/:id',
+                hydrateFallbackElement: <Spinner />,
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
                 element: <PrivateRoutes> <FoodPurchase /> </PrivateRoutes>
             },
