@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import notFoundLottie from "../../assets/lotties/food-not-found.json";
 import Lottie from "lottie-react";
+import Swal from "sweetalert2";
+import moment from "moment";
 
 
 const MyOrders = () => {
@@ -20,22 +22,40 @@ const MyOrders = () => {
             .finally(() => setLoading(false));
     }, [user?.email]);
 
-    // handle cancel order
+    // Cancel an order by its ID (handles both string and {$oid: ...})
     const handleCancelOrder = (orderIdRaw) => {
-        // Always extract string ID (handles both string and {$oid: ...})
-        const orderId = typeof orderIdRaw === 'object' && orderIdRaw?.$oid ? orderIdRaw.$oid : orderIdRaw;
+        // Get the string ID, whether it's a string or an object
+        const orderId = orderIdRaw?.$oid || orderIdRaw;
         if (!orderId) return;
-        axios.delete(`${import.meta.env.VITE_API_URL}/my-orders/${orderId}`)
-            .then(res => {
-                if (res.data.deletedCount) {
-                    setOrders(orders.filter(order => {
-                        const oid = typeof order._id === 'object' && order._id?.$oid ? order._id.$oid : order._id;
-                        return oid !== orderId;
-                    }));
-                    console.log(`Order with ID ${orderId} has been canceled.`);
-                }
-            })
-            .catch(err => console.error("Error canceling order:", err));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to cancel this order?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${import.meta.env.VITE_API_URL}/my-orders/${orderId}`)
+                    .then(res => {
+                        if (res.data.deletedCount) {
+                            setOrders(orders.filter(order => (order._id?.$oid || order._id) !== orderId));
+                            Swal.fire({
+                                title: 'Canceled!',
+                                text: 'Your order has been canceled.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Error canceling order:", err);
+                        Swal.fire('Error', 'Failed to cancel the order.', 'error');
+                    });
+            }
+        });
     };
 
     return (
@@ -61,6 +81,7 @@ const MyOrders = () => {
                                 <th className="px-4 py-3 border-b border-secondary/10">Photo</th>
                                 <th className="px-4 py-3 border-b border-secondary/10">Food Name</th>
                                 <th className="px-4 py-3 border-b border-secondary/10">Seller</th>
+                                <th className="px-4 py-3 border-b border-secondary/10">Date-Time</th>
                                 <th className="px-4 py-3 border-b border-secondary/10">Quantity</th>
                                 <th className="px-4 py-3 border-b border-secondary/10">Total Price</th>
                                 <th className="px-4 py-3 border-b border-secondary/10">Action</th>
@@ -74,14 +95,17 @@ const MyOrders = () => {
                                     <tr key={orderId} className="hover:bg-secondary/5 transition duration-200">
                                         {/* <td className="px-4 py-3 border-b border-secondary/10">{idx + 1}</td> */}
                                         <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">
-                                            <img
-                                                src={order.food_info?.food_img}
-                                                alt={order.food_info?.food_name}
-                                                className="w-20 md:h-20 object-cover rounded-md"
-                                            />
+                                            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center overflow-hidden rounded-md bg-base-300">
+                                                <img
+                                                    src={order.food_info?.food_img}
+                                                    alt={order.food_info?.food_name}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
                                         </td>
                                         <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">{order.food_name}</td>
                                         <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.food_info?.user_name}</td>
+                                        <td className="px-4 py-3 border-b border-secondary/10 text-primary">{moment(order.purchase_time).format("DD MMM - hh:mmA")}</td>
                                         <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.order_quantity}</td>
                                         <td className="px-4 py-3 border-b border-secondary/10 text-primary">${order.total_price}</td>
                                         <td className="px-4 py-3 border-b border-secondary/10"><button onClick={() => handleCancelOrder(order._id)} className="btn btn-xs btn-outline btn-error">Cancel</button></td>

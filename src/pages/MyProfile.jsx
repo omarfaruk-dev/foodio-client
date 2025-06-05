@@ -19,8 +19,8 @@ const MyProfile = () => {
                 <div className="flex flex-col items-center gap-4">
                     {user?.photoURL ? (
                         <img
-                            src={user.photoURL}
-                            alt={user.displayName || user.email}
+                            src={user?.photoURL}
+                            alt={user?.displayName || user?.email}
                             className="w-30 h-30 p-2 rounded-full border-4 border-secondary object-cover shadow"
                             onError={e => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentNode.querySelector('.fallback-avatar').style.display = 'flex'; }}
                         />
@@ -64,7 +64,6 @@ const MyProfile = () => {
                         <span className="font-medium text-primary">Profile Created:</span>
                         <span>{user?.metadata?.creationTime ? new Date(user.metadata.creationTime).toLocaleString(undefined, { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true, year: 'numeric', month: 'short', day: 'numeric' }) : 'N/A'}</span>
                     </div>
-                    {/* You can add more fields here as needed, e.g. phone, bio, etc. */}
                 </div>
             </div>
         </div>

@@ -36,7 +36,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'my-profile',
-                Component: MyProfile,
+                element: <PrivateRoutes> <MyProfile /> </PrivateRoutes>,
             },
             {
                 path: '/all-foods',
