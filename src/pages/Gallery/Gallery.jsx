@@ -4,6 +4,7 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { FaSearchPlus } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Spinner from '../shared/Spinner';
 
 const Gallery = () => {
     const images = [
@@ -72,7 +73,7 @@ const Gallery = () => {
                     dataLength={visibleCount}
                     next={fetchMoreImages}
                     hasMore={visibleCount < images.length}
-                    loader={<div className="flex justify-center py-8"><span className="loading loading-spinner loading-lg text-secondary"></span></div>}
+                    loader={<Spinner />}
                     scrollThreshold={0.95}
                     scrollableTarget={null}
                 >

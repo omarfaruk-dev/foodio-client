@@ -70,7 +70,6 @@ const FoodPurchase = () => {
                     confirmButtonColor: "#3085d6",
                 });
             });
-        
 
     };
 
@@ -104,11 +103,11 @@ const FoodPurchase = () => {
                         <span>Purchased: <span className="font-medium text-primary">{food.purchase_count}</span></span>
                     </div>
                     <div className="text-base md:text-lg text-gray-700 mb-2 whitespace-pre-line italic">
-                        {food.details}
+                        {food.details.slice(0, 100)}{food.details.length > 100 ? '...' : ''}
                     </div>
                 </div>
                 {/* Right: Order Info (7/12) */}
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-10 border-t md:border-t-0 md:border-l border-secondary/10 bg-gradient-to-br from-secondary/5 to-base-200 md:col-span-7">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-4 md:p-8 border-t md:border-t-0 md:border-l border-secondary/10 bg-gradient-to-br from-secondary/5 to-base-200 md:col-span-7">
                     <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Order <span className="text-secondary">Info</span></h2>
                     <div className="space-y-3 text-base md:text-lg">
                         <div>
@@ -117,7 +116,7 @@ const FoodPurchase = () => {
                                 type="text"
                                 value={food.food_name}
                                 readOnly
-                                className="input input-bordered w-full rounded-md bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div>
@@ -126,7 +125,7 @@ const FoodPurchase = () => {
                                 type="text"
                                 value={user?.displayName || ''}
                                 readOnly
-                                className="input input-bordered w-full rounded-md bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div>
@@ -135,17 +134,17 @@ const FoodPurchase = () => {
                                 type="email"
                                 value={user?.email || ''}
                                 readOnly
-                                className="input input-bordered w-full rounded-md bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="font-semibold text-primary block mb-1">Price (per item)</label>
+                                <label className="font-semibold text-primary block mb-1">Price/item</label>
                                 <input
                                     type="text"
                                     value={`$${food.price}`}
                                     readOnly
-                                    className="input input-bordered w-full rounded-md bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                    className="input input-bordered rounded-3xl px-3 bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                                 />
                             </div>
                             <div>
@@ -170,7 +169,7 @@ const FoodPurchase = () => {
                                             setForm(prev => ({ ...prev, order_quantity: val }));
                                         }}
                                         required
-                                        className="input input-bordered w-16 text-center bg-base-100 text-accent focus:outline-none focus:ring-1 focus:ring-secondary"
+                                        className="input input-bordered w-16 text-center rounded-3xl bg-base-100 text-accent focus:outline-none focus:ring-1 focus:ring-secondary"
                                     />
                                     <button
                                         type="button"
@@ -188,7 +187,7 @@ const FoodPurchase = () => {
                                 type="text"
                                 value={`$${(form.order_quantity * food.price).toFixed(2)}`}
                                 readOnly
-                                className="input input-bordered w-32 text-center bg-base-100 text-primary font-bold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-32 text-center rounded-3xl bg-base-100 text-primary font-bold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         {/* Buying Date is not an input field, will be set in backend with Date.now() */}
