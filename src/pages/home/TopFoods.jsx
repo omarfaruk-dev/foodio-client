@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TopFoodsCard from './TopFoodsCard';
+import Spinner from '../shared/Spinner';
 
 const TopFoods = () => {
     const [topFoods, setTopFoods] = useState([]);
@@ -22,9 +23,7 @@ const TopFoods = () => {
                     Discover the most popular foods, loved by our community! These dishes have the highest purchase counts and are trending right now. Try them and taste why everyone is talking!
                 </p>
                 {loading ? (
-                    <div className="flex justify-center py-10">
-                        <span className="loading loading-spinner loading-lg text-secondary"></span>
-                    </div>
+                    <Spinner/>
                 ) : topFoods.length === 0 ? (
                     <div className="text-center text-accent py-10">No top foods found.</div>
                 ) : (

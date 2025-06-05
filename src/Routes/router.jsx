@@ -13,6 +13,7 @@ import MyFoods from "../pages/MyFoods/MyFoods";
 import EditFood from "../pages/EditFood/EditFood";
 import Gallery from "../pages/Gallery/Gallery";
 import PrivateRoutes from "./PrivateRoutes";
+import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
                 path: '/edit-food/:id',
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
                 element: <PrivateRoutes> <EditFood /> </PrivateRoutes>
+            },
+            {
+                path: '/food-purchase/:id',
+                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
+                element: <PrivateRoutes> <FoodPurchase /> </PrivateRoutes>
             },
             {
                 path: '/gallery',

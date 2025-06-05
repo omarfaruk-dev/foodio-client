@@ -61,7 +61,7 @@ const FoodDetails = () => {
                     </div>
                     <div className="mt-8 flex flex-col md:flex-row gap-4">
                         <Link to="/all-foods" className="btn btn-outline btn-secondary rounded-3xl">Back to All Foods</Link>
-                        <button className="btn btn-secondary rounded-3xl font-semibold text-white">Purchase</button>
+                        <Link to={`/food-purchase/${food._id}`} className="btn btn-secondary rounded-3xl font-semibold text-white">Purchase</Link>
                     </div>
                 </div>
             </div>

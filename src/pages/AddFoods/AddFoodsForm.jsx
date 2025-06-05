@@ -48,6 +48,11 @@ const AddFoodsForm = () => {
         // Split ingredients into array
         newFood.ingredients = newFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
 
+        // Convert numeric fields to numbers
+        newFood.quantity = Number(newFood.quantity);
+        newFood.price = Number(newFood.price);
+        newFood.purchase_count = 0; // Always set as number
+
         //send to db
         fetch(`${import.meta.env.VITE_API_URL}/foods`, {
             method: "POST",
