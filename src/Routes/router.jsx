@@ -12,6 +12,7 @@ import Spinner from "../pages/shared/Spinner";
 import MyFoods from "../pages/MyFoods/MyFoods";
 import EditFood from "../pages/EditFood/EditFood";
 import Gallery from "../pages/Gallery/Gallery";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 const router = createBrowserRouter([
@@ -37,33 +38,33 @@ const router = createBrowserRouter([
             },
             {
                 path: '/all-foods',
-                hydrateFallbackElement: <Spinner/>,
-                loader: () =>fetch(`${import.meta.env.VITE_API_URL}/foods`),
+                hydrateFallbackElement: <Spinner />,
+                loader: () => fetch(`${import.meta.env.VITE_API_URL}/foods`),
                 Component: AllFoods,
             },
             {
                 path: '/item-details/:id',
-                hydrateFallbackElement: <Spinner/>,
-                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
+                hydrateFallbackElement: <Spinner />,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
                 Component: FoodDetails,
 
             },
             {
                 path: 'my-foods',
-                element: <MyFoods/>           
+                element: <PrivateRoutes> <MyFoods /> </PrivateRoutes>
             },
             {
                 path: 'add-foods',
-                element: <AddFoodsForm/>,
+                element: <PrivateRoutes> <AddFoodsForm /> </PrivateRoutes>,
             },
             {
                 path: '/edit-food/:id',
-                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
-                element: <EditFood/>
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`),
+                element: <PrivateRoutes> <EditFood /> </PrivateRoutes>
             },
             {
                 path: '/gallery',
-                element: <Gallery/>         
+                element: <Gallery />
             },
             {
                 path: '*',
