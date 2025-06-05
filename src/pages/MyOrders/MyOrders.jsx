@@ -20,7 +20,23 @@ const MyOrders = () => {
             .finally(() => setLoading(false));
     }, [user?.email]);
 
-
+    // handle cancel order
+    const handleCancelOrder = (orderIdRaw) => {
+        // Always extract string ID (handles both string and {$oid: ...})
+        const orderId = typeof orderIdRaw === 'object' && orderIdRaw?.$oid ? orderIdRaw.$oid : orderIdRaw;
+        if (!orderId) return;
+        axios.delete(`${import.meta.env.VITE_API_URL}/my-orders/${orderId}`)
+            .then(res => {
+                if (res.data.deletedCount) {
+                    setOrders(orders.filter(order => {
+                        const oid = typeof order._id === 'object' && order._id?.$oid ? order._id.$oid : order._id;
+                        return oid !== orderId;
+                    }));
+                    console.log(`Order with ID ${orderId} has been canceled.`);
+                }
+            })
+            .catch(err => console.error("Error canceling order:", err));
+    };
 
     return (
         <div className='max-w-7xl min-h-[calc(100vh-300px)] mx-auto px-4 py-10 md:py-20'>
@@ -52,23 +68,26 @@ const MyOrders = () => {
                         </thead>
 
                         <tbody>
-                            {orders.map((order) => (
-                                <tr key={order._id.$oid || order._id} className="hover:bg-secondary/5 transition duration-200">
-                                    {/* <td className="px-4 py-3 border-b border-secondary/10">{idx + 1}</td> */}
-                                    <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">
-                                        <img
-                                            src={order.food_info?.food_img}
-                                            alt={order.food_info?.food_name}
-                                            className="w-20 md:h-20 object-cover rounded-md"
-                                        />
-                                    </td>
-                                    <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">{order.food_name}</td>
-                                    <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.food_info?.user_name}</td>
-                                    <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.order_quantity}</td>
-                                    <td className="px-4 py-3 border-b border-secondary/10 text-primary">${order.total_price}</td>
-                                    <td className="px-4 py-3 border-b border-secondary/10"><button className="btn btn-xs btn-outline btn-error">Cancel</button></td>
-                                </tr>
-                            ))}
+                            {orders.map((order) => {
+                                const orderId = typeof order._id === 'object' && order._id?.$oid ? order._id.$oid : order._id;
+                                return (
+                                    <tr key={orderId} className="hover:bg-secondary/5 transition duration-200">
+                                        {/* <td className="px-4 py-3 border-b border-secondary/10">{idx + 1}</td> */}
+                                        <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">
+                                            <img
+                                                src={order.food_info?.food_img}
+                                                alt={order.food_info?.food_name}
+                                                className="w-20 md:h-20 object-cover rounded-md"
+                                            />
+                                        </td>
+                                        <td className="px-4 py-3 border-b border-secondary/10 font-medium text-primary">{order.food_name}</td>
+                                        <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.food_info?.user_name}</td>
+                                        <td className="px-4 py-3 border-b border-secondary/10 text-primary">{order.order_quantity}</td>
+                                        <td className="px-4 py-3 border-b border-secondary/10 text-primary">${order.total_price}</td>
+                                        <td className="px-4 py-3 border-b border-secondary/10"><button onClick={() => handleCancelOrder(order._id)} className="btn btn-xs btn-outline btn-error">Cancel</button></td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
