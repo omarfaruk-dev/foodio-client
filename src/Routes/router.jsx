@@ -11,6 +11,7 @@ import FoodDetails from "../pages/FoodDetails";
 import Spinner from "../pages/shared/Spinner";
 import MyFoods from "../pages/MyFoods/MyFoods";
 import EditFood from "../pages/EditFood/EditFood";
+import Gallery from "../pages/Gallery/Gallery";
 
 
 const router = createBrowserRouter([
@@ -61,8 +62,8 @@ const router = createBrowserRouter([
                 element: <EditFood/>
             },
             {
-                path: '/contact',
-                element: <h2>Contact Page</h2>            
+                path: '/gallery',
+                element: <Gallery/>         
             },
             {
                 path: '*',
