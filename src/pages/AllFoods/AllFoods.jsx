@@ -18,7 +18,7 @@ const AllFoods = () => {
                 className="w-full h-100 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
                 style={{ backgroundImage: `url('${coverImg}')` }}
             >
-                <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/50 via-secondary/20 to-black/40"></div>
+                <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/60 via-secondary/20 to-black/50"></div>
                 <div className="b from-black/40 via-black/10 to-white/0"></div>
                 <div className="w-full flex items-center justify-center py-8 relative z-10">
                     <h1 className="text-4xl md:text-5xl font-bold text-secondary text-center tracking-wide drop-shadow">ALL FOODS</h1>
@@ -50,7 +50,7 @@ const AllFoods = () => {
             </div>
             {/* food card container */}
             <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
                    {items.map(item => <FoodCard key={item._id} item={item} />)}
                 </div>
             </div>
