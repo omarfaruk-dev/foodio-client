@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import logo from '/logo-foodio.png';
-import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages, FaPlus } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages, FaPlus, FaRegUserCircle, FaListOl } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import ThemeToggle from '../../components/ThemeToggle';
+import { IoLogOutOutline } from 'react-icons/io5';
 
 const NavBar = () => {
     const { user, logOut } = useAuth();
@@ -72,24 +73,33 @@ const NavBar = () => {
                                         )}
                                     </button>
                                     <div
-                                        className={`absolute -right-12 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${userMenuOpen ? 'opacity-100 scale-100 pointer-events-auto visible' : 'opacity-0 scale-95 pointer-events-none invisible'}`}
+                                        className={`absolute -right-12 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${userMenuOpen ? 'opacity-100 scale-100 pointer-events-auto visible' : 'opacity-0 scale-95 pointer-events-none invisible'}`}
                                         style={{ minWidth: '12rem' }}
                                         aria-hidden={!userMenuOpen}
                                     >
                                         <div className='flex flex-col items-center justify-between px-4 py-2 border-b border-dashed border-secondary/20'>
                                             <img src={user?.photoURL} className='w-14 p-1 border-2 border-secondary/30 rounded-full' />
-                                            <Link to='/my-profile' className="px-4 py-2 font-semibold text-secondary" onClick={() => setUserMenuOpen(false)}>{user.displayName}</Link>
+                                            <div className="px-4 py-2 font-semibold text-secondary" onClick={() => setUserMenuOpen(false)}>{user.displayName}</div>
                                         </div>
 
-                                        <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
+                                        <NavLink to='/my-profile' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary transition-all" onClick={() => setUserMenuOpen(false)}>
+                                            <FaRegUserCircle className="mr-2" /> My Profile
+                                        </NavLink>
+                                        <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
                                             <FaUtensils className="mr-2" /> My Foods
                                         </NavLink>
-                                        <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
+                                        <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
                                             <FaPlus className="mr-2" /> Add Foods
                                         </NavLink>
-                                        <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
-                                            <FaImages className="mr-2" /> My Orders
+                                        <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
+                                            <FaListOl  className="mr-2" /> My Orders
                                         </NavLink>
+                                        <button onClick={() => {
+                                            setUserMenuOpen(false);
+                                            handleLogout();
+                                        }} className="flex border-t border-dashed border-secondary/20 items-center w-full px-4 py-2 text-secondary hover:translate-x-2 duration-500 hover:text-secondary">
+                                            <IoLogOutOutline size={20} className="mr-2" /> Log Out
+                                        </button>
                                     </div>
                                 </div>
                                 <button
@@ -105,7 +115,7 @@ const NavBar = () => {
                         {/* Hamburger */}
                         {!menuOpen && (
                             <button className="md:hidden ml-2 p-2 rounded focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
-                                <FaBars size={22} />
+                                <FaBars className='text-secondary' size={22} />
                             </button>
                         )}
                     </div>
@@ -132,15 +142,15 @@ const NavBar = () => {
 
                         </div>
                         <button className="p-2 rounded focus:outline-none" onClick={() => setMenuOpen(false)}>
-                            <FaTimes size={22} />
+                            <FaTimes className='text-secondary' size={22} />
                         </button>
                     </div>
                     <ul className="flex flex-col gap-4">
                         {React.Children.map(links.props.children, (link, idx) => (
-                            <li key={idx}>{link}</li>
+                            <li className='hover:translate-x-2 duration-500 hover:text-secondary' key={idx}>{link}</li>
                         ))}
                     </ul>
-                    <div className="flex flex-col gap-2 mt-4 border-t border-secondary/20 pt-2">
+                    <div className="flex flex-col gap-2 mt-4 border-t border-dashed border-secondary/20 pt-4">
                         {user ? (
                             <button
                                 onClick={handleLogout}
@@ -149,7 +159,7 @@ const NavBar = () => {
                                 Log Out
                             </button>
                         ) : (
-                            <Link to='/login' className="flex items-center justify-center border border-secondary/20 text-primary px-4 py-1 rounded-lg font-medium hover:bg-base-100 transition h-10">Log In</Link>
+                            <Link to='/login' className="flex items-center justify-center btn btn-secondary rounded-3xl text-white px-4 py-1 font-medium transition h-10">Log In</Link>
                         )}
                     </div>
                 </div>

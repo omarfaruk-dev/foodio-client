@@ -74,7 +74,7 @@ const FoodPurchase = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto px-4 py-10 md:py-16">
+        <div className="max-w-5xl mx-auto mt-16 px-4 py-10 md:py-20">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 bg-base-100 rounded-3xl shadow-lg overflow-hidden border border-secondary/10">
                 {/* Left: Food Info (5/12) */}
                 <div className="flex flex-col gap-4 p-4 md:p-8 md:col-span-5">
