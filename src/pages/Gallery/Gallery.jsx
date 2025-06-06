@@ -58,9 +58,9 @@ const Gallery = () => {
     };
 
     return (
-        <div className="pb">
+        <div className="mt-16 pb-10 md:pb-20">
             <header
-                className="w-full h-100 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
+                className="w-full h-80 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
                 style={{ backgroundImage: `url('${coverImg}')` }}
             >
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/60 via-secondary/20 to-black/50"></div>
@@ -68,7 +68,7 @@ const Gallery = () => {
                     <h1 className="text-4xl md:text-5xl font-bold text-secondary text-center tracking-wide drop-shadow">FOOD GALLERY</h1>
                 </div>
             </header>
-            <div className="max-w-7xl mx-auto px-2 sm:px-4 py-8 md:py-16">
+            <div className="max-w-7xl mx-auto px-2 sm:px-4 py-8">
                 <InfiniteScroll
                     dataLength={visibleCount}
                     next={fetchMoreImages}

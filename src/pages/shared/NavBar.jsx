@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from '/logo.png';
-import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages } from 'react-icons/fa';
+import logo from '/logo-foodio.png';
+import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages, FaPlus } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import ThemeToggle from '../../components/ThemeToggle';
@@ -22,7 +22,7 @@ const NavBar = () => {
 
     const links =
         <>
-            <NavLink className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaHome /> Home</NavLink>
+            <NavLink to='/' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaHome /> Home</NavLink>
             <NavLink to='/all-foods' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaUtensils /> All Foods</NavLink>
             <NavLink to='/gallery' className="flex items-center gap-2 text-primary font-medium hover:text-secondary"><FaImages /> Gallery</NavLink>
         </>
@@ -66,25 +66,29 @@ const NavBar = () => {
                                         onClick={() => setUserMenuOpen((prev) => !prev)}
                                     >
                                         {user.photoURL ? (
-                                            <img src={user.photoURL} alt="" className='w-8 rounded-full' />
+                                            <img src={user.photoURL} className='w-8 rounded-full' />
                                         ) : (
                                             <FaUser className="w-8 h-8 text-secondary" />
                                         )}
                                     </button>
                                     <div
-                                        className={`absolute right-0 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${userMenuOpen ? 'opacity-100 scale-100 pointer-events-auto visible' : 'opacity-0 scale-95 pointer-events-none invisible'}`}
+                                        className={`absolute -right-12 mt-2 w-48 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${userMenuOpen ? 'opacity-100 scale-100 pointer-events-auto visible' : 'opacity-0 scale-95 pointer-events-none invisible'}`}
                                         style={{ minWidth: '12rem' }}
                                         aria-hidden={!userMenuOpen}
                                     >
-                                        <Link to='/my-profile' className="px-4 py-2 font-medium text-primary border-b border-secondary/20" onClick={() => setUserMenuOpen(false)}>{user.displayName}</Link>
+                                        <div className='flex flex-col items-center justify-between px-4 py-2 border-b border-dashed border-secondary/20'>
+                                            <img src={user?.photoURL} className='w-14 p-1 border-2 border-secondary/30 rounded-full' />
+                                            <Link to='/my-profile' className="px-4 py-2 font-semibold text-secondary" onClick={() => setUserMenuOpen(false)}>{user.displayName}</Link>
+                                        </div>
+
                                         <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
-                                            My Foods
+                                            <FaUtensils className="mr-2" /> My Foods
                                         </NavLink>
                                         <NavLink to='/add-foods' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
-                                            add Foods
+                                            <FaPlus className="mr-2" /> Add Foods
                                         </NavLink>
                                         <NavLink to='/my-orders' className="flex items-center w-full px-4 py-2 text-primary" onClick={() => setUserMenuOpen(false)}>
-                                            My Orders
+                                            <FaImages className="mr-2" /> My Orders
                                         </NavLink>
                                     </div>
                                 </div>

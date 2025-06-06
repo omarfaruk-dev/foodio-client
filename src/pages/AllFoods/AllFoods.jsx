@@ -13,9 +13,9 @@ const AllFoods = () => {
     }, [search]);
 
     return (
-        <div className="pb-10 md:pb-20">
+        <div className="mt-16 pb-10 md:pb-20">
             <header
-                className="w-full h-100 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
+                className="w-full h-80 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
                 style={{ backgroundImage: `url('${coverImg}')` }}
             >
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/60 via-secondary/20 to-black/50"></div>

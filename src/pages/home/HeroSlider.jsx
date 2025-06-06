@@ -31,7 +31,7 @@ const HeroSlider = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 bg-base-100 my-20">
+    <div className="max-w-7xl mx-auto px-4 bg-base-100 my-16 py-10 md:py-16 lg:py-20">
       <Swiper
         modules={[Autoplay, Pagination, Parallax]}
         autoplay={{
