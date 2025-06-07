@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
+import { Fade } from 'react-awesome-reveal';
 
 const AddFoodsForm = () => {
 
@@ -108,9 +109,11 @@ const AddFoodsForm = () => {
                 className="space-y-6 bg-secondary/2 shadow-md rounded-xl p-6 border-2 border-secondary/30"
                 noValidate
             >
-                <h2 className="flex items-center justify-center gap-2 text-center text-2xl text-primary md:text-3xl font-bold mb-2">
-                    Add <span className="text-secondary">Food </span> <IoFastFoodOutline className='text-secondary' />
-                </h2>
+                <Fade>
+                    <h2 className="flex items-center justify-center gap-2 text-center text-2xl text-primary md:text-3xl font-bold mb-2">
+                        Add <span className="text-secondary">Food </span> <IoFastFoodOutline className='text-secondary' />
+                    </h2>
+                </Fade>
                 <p className="text-center text-accent mb-12 max-w-2xl mx-auto">
                     Fill out the form below to add a new food item to Foodio. All fields are required for accurate listing and better management.
                 </p>
