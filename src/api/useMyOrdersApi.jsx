@@ -1,11 +1,17 @@
-import React from 'react';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const useMyOrdersApi = () => {
-    return (
-        <div>
+    const axiosSecure = useAxiosSecure();
+
+    const myOrdersPromise = email => {
+        return axiosSecure.get(`${import.meta.env.VITE_API_URL}/my-orders?email=${email}`)
+            .then(res => res.data)
             
-        </div>
-    );
+    }
+
+    return {
+        myOrdersPromise
+    };
 };
 
 export default useMyOrdersApi;

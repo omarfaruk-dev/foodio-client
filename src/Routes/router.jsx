@@ -14,7 +14,8 @@ import EditFood from "../pages/EditFood/EditFood";
 import Gallery from "../pages/Gallery/Gallery";
 import PrivateRoutes from "./PrivateRoutes";
 import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
-import MyOrders from "../pages/MyOrders/MyOrders";
+// import MyOrders from "../pages/MyOrders/MyOrders";
+import OrdersFromApi from "../pages/MyOrders/OrdersFromApi";
 
 
 const router = createBrowserRouter([
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'my-orders',
-                element: <PrivateRoutes> <MyOrders /> </PrivateRoutes>
+                element: <PrivateRoutes> <OrdersFromApi /> </PrivateRoutes>
             },
             {
                 path: 'my-foods',

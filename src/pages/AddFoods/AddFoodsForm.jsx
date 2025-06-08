@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { Fade } from 'react-awesome-reveal';
+import axios from 'axios';
 
 const AddFoodsForm = () => {
 
@@ -55,16 +56,9 @@ const AddFoodsForm = () => {
         newFood.purchase_count = 0; // Always set as number
 
         //send to db
-        fetch(`${import.meta.env.VITE_API_URL}/foods`, {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newFood)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
+        axios.post(`${import.meta.env.VITE_API_URL}/foods`, newFood)
+            .then(res => {
+                if (res.data.insertedId) {
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -72,17 +66,18 @@ const AddFoodsForm = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    // form.reset();
+                    form.reset();
+                    navigate('/all-foods'); // Redirect to all foods page after success
                 }
             })
             .catch((err) => {
                 console.error("Error Saving Food Data:", err);
                 Swal.fire({
                     title: "Error!",
-                    text: "Something went wrong!",
+                    text: "Something went wrong while saving food data!",
                     icon: "error",
                 });
-            })
+            });
     }
 
     // Reset error for a field on change
