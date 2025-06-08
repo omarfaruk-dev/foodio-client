@@ -9,13 +9,14 @@ import MyProfile from "../pages/MyProfile";
 import AddFoodsForm from "../pages/AddFoods/AddFoodsForm";
 import FoodDetails from "../pages/FoodDetails";
 import Spinner from "../pages/shared/Spinner";
-import MyFoods from "../pages/MyFoods/MyFoods";
+// import MyFoods from "../pages/MyFoods/MyFoods";
 import EditFood from "../pages/EditFood/EditFood";
 import Gallery from "../pages/Gallery/Gallery";
 import PrivateRoutes from "./PrivateRoutes";
 import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 // import MyOrders from "../pages/MyOrders/MyOrders";
 import OrdersFromApi from "../pages/MyOrders/OrdersFromApi";
+import MyFoodsFromApi from "../pages/MyFoods/MyFoodsFromApi";
 
 
 const router = createBrowserRouter([
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'my-foods',
-                element: <PrivateRoutes> <MyFoods /> </PrivateRoutes>
+                element: <PrivateRoutes> <MyFoodsFromApi /> </PrivateRoutes>
             },
             {
                 path: 'add-foods',

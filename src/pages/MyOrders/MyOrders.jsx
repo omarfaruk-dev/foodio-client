@@ -11,7 +11,7 @@ const MyOrders = ({ myOrdersPromise }) => {
   const initialOrders = use(myOrdersPromise);
  
   const [orders, setOrders] = useState(initialOrders || []);
-  console.log(orders);
+
   // const [loading, setLoading] = useState(true);
 
   // useEffect(() => {

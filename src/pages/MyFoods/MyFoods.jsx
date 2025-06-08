@@ -1,27 +1,27 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
-import Spinner from '../shared/Spinner';
-
+import { useState, use } from 'react';
+// import Spinner from '../shared/Spinner';
 import notFoundLottie from '../../assets/lotties/food-not-found.json'
 import Lottie from 'lottie-react';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/useAuth';
 
-const MyFoods = () => {
-    const { user, loading } = useAuth();
-    const [myFoods, setMyFoods] = useState([]);
-    const [foodsLoading, setFoodsLoading] = useState(false);
+const MyFoods = ({myFoodsPromise}) => {
+    const initialFoods = use(myFoodsPromise); 
+    const { user } = useAuth();
+    const [myFoods, setMyFoods] = useState(initialFoods || []);
+    // const [foodsLoading, setFoodsLoading] = useState(false);
 
-    useEffect(() => {
-        if (loading) return; // Wait for auth to finish
-        if (!user?.email) return;
+    // useEffect(() => {
+    //     if (loading) return; // Wait for auth to finish
+    //     if (!user?.email) return;
 
-        setFoodsLoading(true);
-        axios.get(`${import.meta.env.VITE_API_URL}/my-foods/?email=${user.email}`)
-            .then(res => setMyFoods(res.data || []))
-            .finally(() => setFoodsLoading(false));
-    }, [user, loading]);
+    //     setFoodsLoading(true);
+    //     axios.get(`${import.meta.env.VITE_API_URL}/my-foods/?email=${user.email}`)
+    //         .then(res => setMyFoods(res.data || []))
+    //         .finally(() => setFoodsLoading(false));
+    // }, [user, loading]);
 
     //delete items
     const handleDelete = (id) => {
@@ -61,17 +61,17 @@ const MyFoods = () => {
         });
     }
 
-    if (loading) {
-        return <Spinner />;
-    }
+    // if (loading) {
+    //     return <Spinner />;
+    // }
 
     return (
         <div className="max-w-7xl min-h-[calc(100vh-300px)] mx-auto px-4 py-10 md:py-20">
             <h2 className="text-center text-2xl text-primary md:text-3xl font-bold mb-10">
                 My <span className="text-secondary">Food</span> Listings
             </h2>
-            {foodsLoading && <Spinner />}
-            {!foodsLoading && myFoods.length === 0 ? (
+            {/* {foodsLoading && <Spinner />} */}
+            {myFoods.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16">
                     <Lottie animationData={notFoundLottie} className="w-50 h-50"></Lottie>
                     <h3 className="text-2xl md:text-3xl font-bold text-secondary/60 mt-8 mb-2 text-center">No Foods Found</h3>
