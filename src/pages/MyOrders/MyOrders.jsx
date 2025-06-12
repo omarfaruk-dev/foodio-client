@@ -12,17 +12,6 @@ const MyOrders = ({ myOrdersPromise }) => {
  
   const [orders, setOrders] = useState(initialOrders || []);
 
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //     if (!user?.email) return;
-  //     setLoading(true);
-  //     axios.get(`${import.meta.env.VITE_API_URL}/my-orders/?email=${user.email}`)
-  //         .then(res => setOrders(res.data))
-  //         .catch(err => console.error("Error fetching my orders:", err))
-  //         .finally(() => setLoading(false));
-  // }, [user?.email]);
-
   // Cancel an order by its ID (handles both string and {$oid: ...})
   const handleCancelOrder = (orderIdRaw) => {
       // Get the string ID, whether it's a string or an object
