@@ -69,7 +69,7 @@ const NavBar = () => {
                                         {user.photoURL ? (
                                             <img src={user.photoURL} className='w-8 rounded-full' />
                                         ) : (
-                                            <FaUser className="w-8 h-8 text-secondary" />
+                                            <FaUser className="w-8 h-8 p-1 text-secondary" />
                                         )}
                                     </button>
                                     <div

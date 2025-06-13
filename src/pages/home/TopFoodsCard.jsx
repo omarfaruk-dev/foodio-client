@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 import { FaHeart, FaRegHeart, FaStar, FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router";
 
 const TopFoodsCard = ({ food }) => {
   const [fav, setFav] = useState(false);
   return (
-    <Slide direction="up" duration={1000}>
+    <Fade duration={1000}>
       <div className="card bg-gradient-to-br from-secondary/10 via-base-100 to-primary/5 shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all flex flex-col h-full group border border-secondary/20 rounded-2xl overflow-hidden">
         <figure className="relative">
           <img
@@ -85,7 +85,7 @@ const TopFoodsCard = ({ food }) => {
           </div>
         </div>
       </div>
-    </Slide>
+    </Fade>
   );
 };
 
