@@ -21,7 +21,6 @@ const AddFoodsForm = () => {
         const form = e.target;
         const formData = new FormData(form);
         const newFood = Object.fromEntries(formData.entries());
-        console.log(newFood);
         // Custom validation
         const newErrors = {};
         if (!newFood.food_name?.trim()) newErrors.food_name = 'Food name is required.';

@@ -1,38 +1,96 @@
+import React from 'react';
+// import howItWorksImg from '../../assets/images/hero/hero-1.jpg'; // Use your own illustration or a relevant image
+import howItWOrksLottie from '../../assets/lotties/how-it-works.json'
+import Lottie from 'lottie-react';
+const steps = [
+	{
+		title: 'Browse & Choose',
+		desc: 'Explore our menu, filter by category, and discover trending dishes loved by the Foodio community.'
+	},
+	{
+		title: 'Order & Pay',
+		desc: 'Add your favorites to the cart, review your order, and checkout securely in seconds.'
+	},
+	{
+		title: 'Enjoy & Repeat',
+		desc: 'Sit back and relax! Your food will be delivered hot and fresh. Love it? Order again anytime!'
+	}
+];
 
 const HowItWorks = () => {
-    return (
-        <section className="max-w-7xl mx-auto px-4 pb-10 md:pb-16 lg:pb-24">
-            <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
-                How <span className="text-secondary border-b-2 border-secondary">It Works</span>
-            </h2>
-            <p className="text-center text-accent mb-10 max-w-2xl mx-auto">
-                Ordering your favorite food from Foodio is simple and fast. Just follow these easy steps and enjoy delicious meals delivered to your door!
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="flex flex-col items-center bg-base-100 rounded-xl shadow-md hover:shadow-lg p-8 border-t-4 border-accent/60 hover:-translate-y-2 duration-700 transition-all">
-                    <div className="bg-accent/10 rounded-full p-4 mb-4">
-                        <span className="text-3xl md:text-4xl text-accent">🍽️</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Browse & Choose</h3>
-                    <p className="text-center text-accent">Explore our menu, search or filter by category, and discover trending dishes loved by the community.</p>
-                </div>
-                <div className="flex flex-col items-center bg-base-100 rounded-xl shadow-md hover:shadow-lg p-8 border-t-4 border-secondary/60 hover:-translate-y-2 duration-700 transition-all">
-                    <div className="bg-secondary/10 rounded-full p-4 mb-4">
-                        <span className="text-3xl md:text-4xl text-secondary">🛒</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Order & Pay</h3>
-                    <p className="text-center text-accent">Add your favorite foods to the cart, review your order, and checkout securely in seconds.</p>
-                </div>
-                <div className="flex flex-col items-center bg-base-100 rounded-xl shadow-md hover:shadow-lg p-8 border-t-4 border-primary/60 hover:-translate-y-2 duration-700 transition-all">
-                    <div className="bg-primary/10 rounded-full p-4 mb-4">
-                        <span className="text-3xl md:text-4xl text-primary">🚚</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Enjoy & Repeat</h3>
-                    <p className="text-center text-accent">Sit back and relax! Your food will be delivered hot and fresh. Love it? Order again anytime!</p>
-                </div>
-            </div>
-        </section>
-    );
+	return (
+		<section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+			<div className="text-center mb-12">
+				<span className="uppercase text-xs tracking-widest text-secondary font-semibold mb-2 block">
+					Our Process
+				</span>
+				<h2 className="text-3xl md:text-5xl font-bold text-primary mb-2">
+					Let's see how it works
+				</h2>
+			</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+				{/* Illustration */}
+				<div className="flex justify-center">
+					 <Lottie animationData={howItWOrksLottie} className="w-100 h-100"></Lottie>
+                                       
+				</div>
+				{/* Steps */}
+				<ol className="relative border-l-2 border-secondary/20 ml-6 md:ml-0">
+					{steps.map((step, idx) => (
+						<li
+							key={step.title}
+							className="mb-12 last:mb-0 flex items-start"
+						>
+							<span
+								className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
+									idx === 0
+										? 'bg-secondary text-white border-secondary'
+										: 'bg-base-100 text-secondary border-secondary/40'
+								} absolute -left-5 top-0`}
+							>
+								{idx === 0 ? (
+									<svg
+										className="w-5 h-5"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="3"
+										viewBox="0 0 24 24"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M5 13l4 4L19 7"
+										/>
+									</svg>
+								) : (
+									<svg
+										className="w-5 h-5"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="3"
+										viewBox="0 0 24 24"
+									>
+										<circle cx="12" cy="12" r="10" />
+									</svg>
+								)}
+							</span>
+							<div className="ml-8">
+								<span className="uppercase text-xs text-secondary font-semibold tracking-widest">
+									Step {idx + 1}
+								</span>
+								<h3 className="text-lg md:text-xl font-bold text-primary mb-1 mt-1">
+									{step.title}
+								</h3>
+								<p className="text-accent text-base max-w-md">
+									{step.desc}
+								</p>
+							</div>
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
+	);
 };
 
 export default HowItWorks;
