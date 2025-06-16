@@ -74,7 +74,7 @@ const FoodPurchase = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto mt-16 px-4 py-10 md:py-20">
+        <div className="max-w-5xl mx-auto mt-16 px-4 py-8 md:py-16 lg:py-24">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 bg-base-100 rounded-3xl shadow-lg overflow-hidden border border-secondary/10">
                 {/* Left: Food Info (5/12) */}
                 <div className="flex flex-col gap-4 p-4 md:p-8 md:col-span-5">
@@ -83,7 +83,7 @@ const FoodPurchase = () => {
                         <img
                             src={food.food_img}
                             alt={food.food_name}
-                            className="rounded-2xl shadow-lg w-full max-w-xs h-60 object-cover transition-transform duration-500 hover:scale-105"
+                            className="rounded-2xl shadow-lg w-full max-w-xs h-60 object-cover transition-transform duration-500 hover:scale-102"
                         />
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-primary mb-2 flex items-center gap-3">{food.food_name}
@@ -102,7 +102,7 @@ const FoodPurchase = () => {
                         <span>Price: <span className="font-medium text-primary">${food.price}</span></span>
                         <span>Purchased: <span className="font-medium text-primary">{food.purchase_count}</span></span>
                     </div>
-                    <div className="text-base md:text-lg text-gray-700 mb-2 whitespace-pre-line italic">
+                    <div className="text-base md:text-lg text-primary/90 mb-2 whitespace-pre-line italic">
                         {food.details.slice(0, 100)}{food.details.length > 100 ? '...' : ''}
                     </div>
                 </div>

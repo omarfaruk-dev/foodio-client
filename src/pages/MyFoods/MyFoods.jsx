@@ -53,7 +53,7 @@ const MyFoods = ({myFoodsPromise}) => {
     // }
 
     return (
-        <div className="max-w-7xl min-h-[calc(100vh-300px)] mx-auto px-4 py-10 md:py-20">
+        <div className="max-w-7xl mt-16 min-h-[calc(100vh-300px)] mx-auto px-4 py-8 md:py-16 lg:py-20">
             <Fade>
             <h2 className="text-center text-2xl text-primary md:text-3xl font-bold mb-10">
                 My <span className="text-secondary">Food</span> Listings

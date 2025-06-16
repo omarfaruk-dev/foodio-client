@@ -6,7 +6,6 @@ import { use, useState } from "react";
 import axios from "axios";
 
 const MyOrders = ({ myOrdersPromise }) => {
-  // Using the custom hook to fetch orders - NEW lINE ADDED
 
   const initialOrders = use(myOrdersPromise);
  
@@ -49,7 +48,7 @@ const MyOrders = ({ myOrdersPromise }) => {
   };
 
   return (
-    <div className="max-w-7xl min-h-[calc(100vh-300px)] mx-auto px-4 py-10 md:py-20">
+    <div className="max-w-7xl mt-16 min-h-[calc(100vh-300px)] mx-auto px-4 py-8 md:py-16 lg:py-20">
       <h2 className="text-center text-2xl text-primary md:text-3xl font-bold mb-10">
         My <span className="text-secondary">Orders</span>
       </h2>
