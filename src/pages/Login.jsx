@@ -1,11 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import Spinner from "./shared/Spinner";
+import loginLottie from '../assets/lotties/login-lottie.json';
+import Lottie from "lottie-react";
+
 
 const Login = () => {
 
@@ -112,20 +114,16 @@ const Login = () => {
 
     return (
         <div className="mt-16 max-w-5xl py-10 md:py-20 mx-auto flex flex-col md:flex-row">
-            <title>Foodio | User SignIn</title>
+            <title>Foodio | User Login</title>
             {/* Left Column Image */}
             <div className="flex-1 flex items-center justify-center p-4 w-11/12 lg:w-full mx-auto">
-                <DotLottieReact
-                    src="https://lottie.host/adbe480f-f24b-4292-838b-a4f74294f37e/FrK9Ai3HLB.lottie"
-                    loop
-                    autoplay
-                />
+               <Lottie animationData={loginLottie}></Lottie>
             </div>
 
             {/* Right Column (Form) */}
             <div className="flex-1 w-full flex items-center justify-center p-4 md:p-8">
                 <div className="w-full max-w-md border-2 p-4 md:p-6 lg:p-8 rounded-xl border-secondary/30 shadow-md">
-                    <h2 className="text-primary text-3xl font-bold mb-6 text-center">Sign In</h2>
+                    <h2 className="text-primary text-3xl font-bold mb-6 text-center">Log In</h2>
 
                     <form
                         onSubmit={handleSignin}
@@ -184,7 +182,7 @@ const Login = () => {
                         onClick={handleGoogleSignIn}
                         className="btn btn-outline hover:bg-secondary/15 border-secondary w-full rounded-3xl">
                         <FcGoogle />
-                        Sign in with Google
+                        Login with Google
                     </button>
 
                     {/* Sign Up Link */}

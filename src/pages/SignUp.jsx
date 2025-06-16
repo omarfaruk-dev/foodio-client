@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import useAuth from "../hooks/useAuth";
 import Spinner from "./shared/Spinner";
 import Swal from "sweetalert2";
