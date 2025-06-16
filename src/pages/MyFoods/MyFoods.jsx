@@ -60,7 +60,7 @@ const MyFoods = ({myFoodsPromise}) => {
             </h2>
 
             </Fade>
-            {/* {foodsLoading && <Spinner />} */}
+            {/* {if no food found />} */}
             {myFoods.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16">
                     <Lottie animationData={notFoundLottie} className="w-50 h-50"></Lottie>
