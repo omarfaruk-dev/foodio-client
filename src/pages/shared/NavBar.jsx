@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import logo from '/logo-foodio.png';
-import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaCode, FaHome, FaUtensils, FaImages, FaPlus, FaRegUserCircle, FaListOl } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaHome, FaUtensils, FaImages, FaPlus, FaRegUserCircle, FaListOl } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import ThemeToggle from '../../components/ThemeToggle';
 import { IoLogOutOutline } from 'react-icons/io5';
+import Swal from "sweetalert2";
 
 const NavBar = () => {
     const { user, logOut } = useAuth();
@@ -12,13 +13,29 @@ const NavBar = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const navigate = useNavigate();
     const handleLogout = () => {
-        logOut()
-            .then(() => {
-                navigate('/')
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to log out?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, log out!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error.message || 'Logout failed!'
+                        });
+                    });
+            }
+        });
     };
 
     const links =
@@ -43,7 +60,7 @@ const NavBar = () => {
     }, [userMenuOpen]);
 
     return (
-        <nav ref={navRef} className="fixed top-0 left-0 bg-base-100/90 border-b border-secondary/20 w-full z-50">
+        <nav ref={navRef} className="fixed top-0 left-0 bg-base-100 border-b border-secondary/20 w-full z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center w-full">
                     {/* Logo */}
@@ -82,7 +99,7 @@ const NavBar = () => {
                                             <div className="px-4 py-2 font-semibold text-secondary" onClick={() => setUserMenuOpen(false)}>{user.displayName}</div>
                                         </div>
 
-                                        <NavLink to='/my-profile' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary transition-all" onClick={() => setUserMenuOpen(false)}>
+                                        <NavLink to='/my-profile' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
                                             <FaRegUserCircle className="mr-2" /> My Profile
                                         </NavLink>
                                         <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>

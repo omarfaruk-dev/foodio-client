@@ -15,7 +15,7 @@ const TopFoods = () => {
     }, []);
 
     return (
-        <div className='max-w-7xl mx-auto px-4 pb-10 md:pb-16 lg:pb-20'>
+        <div className='max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-24'>
             <div className="">
                 <Slide direction='right'>
                     <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">

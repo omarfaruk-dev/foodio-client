@@ -8,7 +8,7 @@ const FoodDetails = () => {
     }
 
     return (
-        <div className="max-w-3xl mt-16 mx-auto px-4 py-12 md:py-20">
+        <div className="max-w-4xl mx-auto px-4 pb-8 md:pb-16 lg:pb-20">
             <div className="relative bg-base-100 rounded-3xl shadow-2xl border border-secondary/10 overflow-visible flex flex-col">
                 {/* Floating image */}
                 <div className="flex justify-center -mt-20 mb-4 z-10">

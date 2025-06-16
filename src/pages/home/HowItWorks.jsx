@@ -1,5 +1,5 @@
 import React from 'react';
-// import howItWorksImg from '../../assets/images/hero/hero-1.jpg'; // Use your own illustration or a relevant image
+import { Slide } from 'react-awesome-reveal';
 import howItWOrksLottie from '../../assets/lotties/how-it-works.json'
 import Lottie from 'lottie-react';
 const steps = [
@@ -19,14 +19,18 @@ const steps = [
 
 const HowItWorks = () => {
 	return (
-		<section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-			<div className="text-center mb-12">
-				<span className="uppercase text-xs tracking-widest text-secondary font-semibold mb-2 block">
-					Our Process
-				</span>
-				<h2 className="text-3xl md:text-5xl font-bold text-primary mb-2">
-					Let's see how it works
-				</h2>
+		<section className="max-w-7xl mx-auto px-4 pb-8 md:pb-16 lg:pb-24">
+			<div className="mb-12">
+				<Slide direction="right">
+					<h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
+						How <span className="text-secondary border-b-2 border-secondary">It Works</span>
+					</h2>
+				</Slide>
+				<Slide>
+					<p className="text-center text-accent mb-10 max-w-2xl mx-auto">
+						Ordering your favorite food from Foodio is simple and fun. Just follow these steps and enjoy delicious meals delivered to your door!
+					</p>
+				</Slide>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 				{/* Illustration */}

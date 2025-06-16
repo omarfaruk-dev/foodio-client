@@ -2,25 +2,37 @@ import React from 'react';
 
 const CallToAction = () => {
     return (
-        <section className="relative max-w-5xl mx-auto px-4 py-20 my-16 rounded-[2.5rem] bg-gradient-to-br from-primary/90 via-secondary/80 to-accent/80 shadow-2xl flex flex-col items-center text-center overflow-hidden border-4 border-white/30">
-            {/* Decorative floating icons */}
-            <div className="absolute top-6 left-8 animate-bounce-slow text-5xl md:text-6xl opacity-30 select-none pointer-events-none">🍕</div>
-            <div className="absolute top-10 right-10 animate-pulse text-4xl md:text-5xl opacity-20 select-none pointer-events-none">🍔</div>
-            <div className="absolute bottom-8 left-16 animate-bounce text-4xl md:text-5xl opacity-20 select-none pointer-events-none">🍣</div>
-            <div className="absolute bottom-6 right-20 animate-spin-slow text-4xl md:text-5xl opacity-20 select-none pointer-events-none">🍰</div>
-            {/* Decorative blob */}
-            <div className="absolute -bottom-10 -right-10 opacity-20 pointer-events-none select-none hidden md:block">
-                <img src="/src/assets/images/blob-haikei.png" alt="decorative blob" className="w-72 h-72 object-contain" />
+        <section className="relative w-full bg-gradient-to-br from-[#FF9F45] via-[#FF6F61] to-[#FF3C38] py-24 my-20 overflow-hidden">
+            {/* Floating food emojis for playful touch */}
+            <div className="absolute top-10 left-16 animate-bounce-slow text-7xl opacity-10 select-none">🍕</div>
+            <div className="absolute bottom-12 right-24 animate-pulse text-6xl opacity-10 select-none">🍔</div>
+            <div className="absolute top-1/3 right-10 animate-spin-slow text-6xl opacity-10 select-none">🥗</div>
+
+            {/* Card */}
+            <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 flex justify-center">
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25)] rounded-3xl px-10 md:px-20 py-16 text-center w-full overflow-hidden">
+                    {/* Soft glowing background layer */}
+                    <div className="absolute -inset-1.5 bg-gradient-to-tr from-yellow-300 via-red-400 to-pink-500 opacity-20 blur-3xl rounded-[inherit] z-[-1]" />
+
+                    {/* Heading */}
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl tracking-tight leading-snug">
+                        Hungry? <span className="text-yellow-300">Let's Fix That.</span>
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="mt-6 text-lg md:text-xl text-primary max-w-2xl mx-auto font-medium leading-relaxed">
+                        Craving something delicious? Foodio delivers hot, fresh, and irresistible meals straight to your door. Skip the wait — your tastebuds deserve it!
+                    </p>
+
+                    {/* CTA Button */}
+                    <a
+                        href="/all-foods"
+                        className="mt-10 inline-block bg-white text-red-500 font-bold px-8 py-3 rounded-full text-lg shadow-md hover:bg-yellow-100 hover:scale-105 hover:-translate-y-1 transform transition-all duration-300"
+                    >
+                        🍽️ Order Now
+                    </a>
+                </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-xl tracking-tight">
-                Ready to Taste <span className="text-accent">Something Amazing?</span>
-            </h2>
-            <p className="text-lg md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-medium">
-                Join Foodio today and discover a world of delicious foods, trending dishes, and exclusive offers. Your next favorite meal is just a click away!
-            </p>
-            <a href="/all-foods" className="btn btn-secondary btn-lg px-12 py-4 rounded-full font-bold text-xl shadow-lg hover:bg-white hover:text-secondary hover:scale-110 hover:-translate-y-2 duration-700 transition-all border-2 border-white/40">
-                Explore All Foods
-            </a>
         </section>
     );
 };

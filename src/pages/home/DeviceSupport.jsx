@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Slide } from 'react-awesome-reveal';
 import { FaMobileAlt, FaGooglePlay, FaApple, FaTablet, FaDesktop } from 'react-icons/fa';
 
 const DeviceSupport = () => {
@@ -55,15 +56,19 @@ const DeviceSupport = () => {
     const { title, description, img, details } = tabData[activeTab];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 pb-10 md:pb-16 lg:pb-24 bg-base-100">
+        <div className="max-w-7xl mx-auto px-4 pb-8 md:pb-16 lg:pb-24 bg-base-100">
             <div className="max-w-5xl mx-auto">
-                <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
+                <Slide direction="right">
+                    <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
                     Foodio <span className="text-secondary border-b-2 border-secondary">Works Everywhere</span>
                 </h2>
-                <p className="text-center text-accent mb-10 max-w-2xl mx-auto">
+                </Slide>
+                <Slide direction="left">
+                    <p className="text-center text-accent mb-10 max-w-2xl mx-auto">
                     Enjoy Foodio on any device—mobile, tablet, or desktop. Seamlessly order, track, and manage your meals wherever you are!
                 </p>
-                <div className="flex justify-center mb-8">
+                </Slide>
+                <div className="flex justify-center mb-8 md:mb-12">
                     <div className="flex rounded-full border border-secondary/20 overflow-hidden bg-base-100 shadow-sm">
                         {tabs.map((tab) => (
                             <button
