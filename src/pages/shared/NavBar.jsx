@@ -99,7 +99,7 @@ const NavBar = () => {
                                             <div className="px-4 py-2 font-semibold text-secondary" onClick={() => setUserMenuOpen(false)}>{user.displayName}</div>
                                         </div>
 
-                                        <NavLink to='/my-profile' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
+                                        <NavLink to='/my-profile' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500" onClick={() => setUserMenuOpen(false)}>
                                             <FaRegUserCircle className="mr-2" /> My Profile
                                         </NavLink>
                                         <NavLink to='/my-foods' className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary" onClick={() => setUserMenuOpen(false)}>
@@ -164,14 +164,20 @@ const NavBar = () => {
                     </div>
                     <ul className="flex flex-col gap-4">
                         {React.Children.map(links.props.children, (link, idx) => (
-                            <li className='hover:translate-x-2 duration-500 hover:text-secondary' key={idx}>{link}</li>
+                            <li
+                                className='hover:translate-x-2 duration-500 hover:text-secondary'
+                                key={idx}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {link}
+                            </li>
                         ))}
                     </ul>
                     <div className="flex flex-col gap-2 mt-4 border-t border-dashed border-secondary/20 pt-4">
                         {user ? (
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center justify-center btn btn-secondary text-white px-4 py-1 rounded-full font-medium hover:bg-base-100 transition h-10"
+                                className="flex items-center justify-center btn btn-secondary text-white px-4 py-1 rounded-full     gap-x-1 transition h-10"
                             >
                                 Log Out
                             </button>
