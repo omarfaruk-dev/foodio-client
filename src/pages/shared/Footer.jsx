@@ -11,23 +11,22 @@ const Footer = () => {
                 <div className="md:col-span-2 flex flex-col gap-2 items-start">
                     <div className="flex items-center gap-3 mb-2">
                         <img src={logo} alt="Foodio Logo" className="w-32 drop-shadow-lg" />
-                        <span className="text-2xl font-bold text-secondary tracking-wide">Foodio</span>
                     </div>
                     <p className="text-accent text-base leading-relaxed mb-2 max-w-xs">Discover, order, and manage your favorite meals with Foodio. Enjoy a seamless, secure, and delicious experience every time.</p>
                 </div>
                 {/* Navigation Links - Unique, Iconic, Grouped */}
                 <div className="flex flex-col gap-2">
                     <h3 className="text-lg font-semibold mb-2 text-primary">Navigation</h3>
-                    <NavLink to='/' className="flex items-center gap-2 hover:text-secondary font-medium"><FaHome /> Home</NavLink>
-                    <NavLink to='/all-foods' className="flex items-center gap-2 hover:text-secondary font-medium"><FaUtensils /> All Foods</NavLink>
-                    <NavLink to='/gallery' className="flex items-center gap-2 hover:text-secondary font-medium"><FaImages /> Gallery</NavLink>
+                    <NavLink to='/' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaHome /> Home</NavLink>
+                    <NavLink to='/all-foods' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaUtensils /> All Foods</NavLink>
+                    <NavLink to='/gallery' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaImages /> Gallery</NavLink>
                 </div>
                 <div className="flex flex-col gap-2">
                     <h3 className="text-lg font-semibold mb-2 text-primary">User</h3>
-                    <NavLink to='/my-profile' className="flex items-center gap-2 hover:text-secondary font-medium"><FaRegUserCircle /> My Profile</NavLink>
-                    <NavLink to='/my-foods' className="flex items-center gap-2 hover:text-secondary font-medium"><FaUtensils /> My Foods</NavLink>
-                    <NavLink to='/add-foods' className="flex items-center gap-2 hover:text-secondary font-medium"><FaPlus /> Add Foods</NavLink>
-                    <NavLink to='/my-orders' className="flex items-center gap-2 hover:text-secondary font-medium"><FaListOl /> My Orders</NavLink>
+                    <NavLink to='/my-profile' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaRegUserCircle /> My Profile</NavLink>
+                    <NavLink to='/my-foods' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaUtensils /> My Foods</NavLink>
+                    <NavLink to='/add-foods' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaPlus /> Add Foods</NavLink>
+                    <NavLink to='/my-orders' className="flex items-center gap-2 hover:translate-x-2 duration-500 hover:text-secondary font-medium"><FaListOl /> My Orders</NavLink>
                 </div>
                 {/* Contact & Social */}
                 <div className="flex flex-col gap-2 items-center md:items-start">
