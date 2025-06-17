@@ -93,7 +93,6 @@ const SignUp = () => {
                           displayName: form.name,
                           photoURL: form.photo,
                       };
-                      console.log("updatedUser info:", updatedUser)
                       setUser(updatedUser);
                       Swal.fire({
                           position: "center",
