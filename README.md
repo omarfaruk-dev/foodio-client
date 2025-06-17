@@ -34,8 +34,7 @@ Foodio is a modern, visually appealing food delivery web application built with 
 
 ## Tech Stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS, DaisyUI
-- **Routing:** React Router v7
+- **Frontend:** React Router, Vite, Tailwind CSS, DaisyUI
 - **State & Context:** React Context API
 - **API & Data:** Axios, Firebase
 - **UI/UX:** Swiper, React Icons, Lottie, yet-another-react-lightbox, react-awesome-reveal
@@ -45,7 +44,8 @@ Foodio is a modern, visually appealing food delivery web application built with 
 
 1. **Clone the repository:**
    ```bash
-   git clone 
+   git clone https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-omarfaruk-dev
+
    cd b11a11-client-side-omarfaruk-dev
    ```
 2. **Install dependencies:**
@@ -79,8 +79,6 @@ Foodio is a modern, visually appealing food delivery web application built with 
 - Animations: [LottieFiles](https://lottiefiles.com/)
 - UI Libraries: Swiper, DaisyUI, SweetAlert2
 
-## License
-This project is for educational and portfolio use. Contact the author for commercial licensing.
 
 ---
 
