@@ -10,7 +10,7 @@ const DeviceSupport = () => {
             title: 'Foodio On The Go',
             description:
                 'Order, track, and enjoy your favorite meals anytime, anywhere with our mobile app. Available for both Android and iOS, Foodio puts deliciousness in your pocket.',
-            img: 'https://i.ibb.co.com/VWsPXwSp/mobile.png',
+            img: 'https://i.postimg.cc/bvd7GDgY/mobile.png',
             details: [
                 'Push notifications for order updates',
                 'Save your favorite foods for quick reordering',
@@ -23,7 +23,7 @@ const DeviceSupport = () => {
             title: 'Tablet Experience',
             description:
                 'Enjoy Foodio on your tablet with a beautiful, responsive interface. Perfect for browsing menus, sharing with friends, and placing group orders from the comfort of your couch.',
-            img: 'https://i.ibb.co.com/spgTGgVK/tablet.png',
+            img: 'https://i.postimg.cc/7ZBvYMgQ/tablet.png',
             details: [
                 'Split-screen menu and order view',
                 'Great for family or group ordering',
@@ -36,7 +36,7 @@ const DeviceSupport = () => {
             title: 'Full-Featured Web Platform',
             description:
                 'Access all Foodio features on your desktop or laptop. Manage your orders, explore trending foods, and enjoy a seamless experience on any browser.',
-            img: 'https://i.ibb.co.com/XZKr8k7y/laptop.png',
+            img: 'https://i.postimg.cc/7ZP8kQT2/laptop.png',
             details: [
                 'Comprehensive dashboard for order management',
                 'Advanced search and filtering',
