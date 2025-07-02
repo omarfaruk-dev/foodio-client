@@ -5,6 +5,7 @@ const AllFoods = () => {
 
     const [items, setItems] = useState([]);
     const [search, setSearch] = useState("");
+    const [sort, setSort] = useState("");
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/foods?search=${search}`)
@@ -25,15 +26,15 @@ const AllFoods = () => {
                 </div>
             </header>
             {/* Add a search  */}
-            <div className="flex justify-center mb-10">
+            <div className="w-full flex flex-col items-center mb-10">
                 <form 
-                    className="flex w-full max-w-xl gap-2 px-4"
+                    className="flex flex-row w-full max-w-2xl gap-2 px-4 justify-center"
                     onSubmit={e => e.preventDefault()}
                 >
                     <input
                         type="text"
                         placeholder="Search foods..."
-                        className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
+                        className="input input-bordered flex-1 rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
                         name="search"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
@@ -47,6 +48,44 @@ const AllFoods = () => {
                         Search
                     </button>
                 </form>
+                <div className="flex flex-col gap-4 lg:flex-row lg:gap-8 w-full justify-center items-center mt-6">
+                    {/* Sort by Country */}
+                    <div className="w-full max-w-xs flex flex-col items-center">
+                        <label className="text-primary font-semibold mb-1">Sort by Country</label>
+                        <select
+                            className="select select-bordered select-sm rounded-md w-full text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                            value={sort === 'country' ? 'country' : ''}
+                            onChange={e => setSort(e.target.value === 'country' ? 'country' : '')}
+                        >
+                            <option value="">None</option>
+                            <option value="country">Country (A-Z)</option>
+                        </select>
+                    </div>
+                    {/* Sort by Price */}
+                    <div className="w-full max-w-xs flex flex-col items-center">
+                        <label className="text-primary font-semibold mb-1">Sort by Price</label>
+                        <select
+                            className="select select-bordered select-sm rounded-md w-full text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                            value={sort === 'price' ? 'price' : ''}
+                            onChange={e => setSort(e.target.value === 'price' ? 'price' : '')}
+                        >
+                            <option value="">None</option>
+                            <option value="price">Price: Low to High</option>
+                        </select>
+                    </div>
+                    {/* Sort by Availability */}
+                    <div className="w-full max-w-xs flex flex-col items-center">
+                        <label className="text-primary font-semibold mb-1">Sort by Availability</label>
+                        <select
+                            className="select select-bordered select-sm rounded-md w-full text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                            value={sort === 'availability' ? 'availability' : ''}
+                            onChange={e => setSort(e.target.value === 'availability' ? 'availability' : '')}
+                        >
+                            <option value="">None</option>
+                            <option value="availability">Availability (In-stock First)</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             {/* food card container */}
             <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
