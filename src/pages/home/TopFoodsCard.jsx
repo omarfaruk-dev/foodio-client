@@ -58,24 +58,8 @@ const TopFoodsCard = ({ food }) => {
           <p className="text-xs md:text-sm text-accent line-clamp-3 mb-3 italic">
             {food.details}
           </p>
-          <div className="flex flex-wrap gap-4 text-xs md:text-sm mb-4">
-            <span className="bg-amber-500/20 text-primary px-2 py-1 rounded font-semibold">
-              Available Quantity: {food.quantity}
-            </span>
-          </div>
-          <div className="flex items-center justify-between mt-auto pt-2 border-t border-secondary/10">
-            <span className="text-sm text-secondary font-bold flex items-center gap-1">
-              <FaCheckCircle
-                className="inline-block text-secondary"
-                size={18}
-              />
-              {food.purchase_count || 0} Times Sold
-            </span>
-            <span className="text-md text-accent font-medium">
-              Seller: {food.user_name}
-            </span>
-          </div>
-          <div className="mt-5">
+         
+          <div className="mt-3">
             <Link
               to={`/item-details/${food._id}`}
               className="btn btn-secondary btn-sm lg:btn-md w-full font-semibold text-white rounded-3xl shadow hover:scale-102 transition-transform duration-200"

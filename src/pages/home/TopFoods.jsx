@@ -32,7 +32,7 @@ const TopFoods = () => {
                 ) : topFoods.length === 0 ? (
                     <div className="text-center text-accent py-10">No top foods found.</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {topFoods.map(food => (
                             <TopFoodsCard key={food._id} food={food} />
                         ))}

@@ -102,7 +102,7 @@ const FoodPurchase = () => {
                         <span>Price: <span className="font-medium text-primary">${food.price}</span></span>
                         <span>Purchased: <span className="font-medium text-primary">{food.purchase_count}</span></span>
                     </div>
-                    <div className="text-base md:text-lg text-primary/90 mb-2 whitespace-pre-line italic">
+                    <div className="text-base text-accent mb-2 whitespace-pre-line italic">
                         {food.details.slice(0, 100)}{food.details.length > 100 ? '...' : ''}
                     </div>
                 </div>
@@ -116,7 +116,7 @@ const FoodPurchase = () => {
                                 type="text"
                                 value={food.food_name}
                                 readOnly
-                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-accent font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div>
@@ -125,7 +125,7 @@ const FoodPurchase = () => {
                                 type="text"
                                 value={user?.displayName || ''}
                                 readOnly
-                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-accent font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div>
@@ -134,7 +134,7 @@ const FoodPurchase = () => {
                                 type="email"
                                 value={user?.email || ''}
                                 readOnly
-                                className="input input-bordered w-full rounded-3xl bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                className="input input-bordered w-full rounded-3xl bg-base-100 text-accent font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
@@ -144,7 +144,7 @@ const FoodPurchase = () => {
                                     type="text"
                                     value={`$${food.price}`}
                                     readOnly
-                                    className="input input-bordered rounded-3xl px-3 bg-base-100 text-primary font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
+                                    className="input input-bordered rounded-3xl px-3 bg-base-100 text-accent font-semibold focus:outline-none focus:ring-1 focus:ring-secondary"
                                 />
                             </div>
                             <div>
@@ -183,12 +183,12 @@ const FoodPurchase = () => {
                         </div>
                         <div>
                             <label className="font-semibold text-primary block mb-1">Total Price</label>
-                            <input
-                                type="text"
-                                value={`$${(form.order_quantity * food.price).toFixed(2)}`}
-                                readOnly
-                                className="input input-bordered w-32 text-center rounded-3xl bg-base-100 text-primary font-bold focus:outline-none focus:ring-1 focus:ring-secondary"
-                            />
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="inline-flex items-center gap-2 text-2xl font-extrabold text-accent bg-secondary/5 border border-secondary/20 rounded-2xl px-5 py-2 shadow-sm">
+                                    <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a5 5 0 00-10 0v2a5 5 0 0010 0zm-2 7h2a2 2 0 002-2v-5a2 2 0 00-2-2h-2m-4 0H7a2 2 0 00-2 2v5a2 2 0 002 2h2m4 0v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2" /></svg>
+                                    ${ (form.order_quantity * food.price).toFixed(2) }
+                                </span>
+                            </div>
                         </div>
                         {/* Buying Date is not an input field, will be set in backend with Date.now() */}
                     </div>
