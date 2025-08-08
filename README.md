@@ -45,9 +45,9 @@ Foodio is a modern, visually appealing food delivery web application built with 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-omarfaruk-dev
+   git clone https://github.com/omarfaruk-dev/foodio-client.git
 
-   cd b11a11-client-side-omarfaruk-dev
+   cd foodio-client
    ```
 2. **Install dependencies:**
    ```bash
