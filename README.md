@@ -1,5 +1,6 @@
 # Foodio – Modern Resturant Management Web App
 
+![Petify Responsive UI Screenshot](https://i.postimg.cc/d0sNPGXG/foodio.jpg)
 
 **Live Site:** [https://foodi0.web.app](https://foodi0.web.app)
 
