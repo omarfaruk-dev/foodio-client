@@ -90,7 +90,7 @@ const NavBar = () => {
       ref={navRef}
       className="fixed top-0 left-0 bg-base-100 border-b border-secondary/20 w-full z-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center w-full">
           {/* Logo */}
           <div className="flex items-center">
@@ -101,7 +101,7 @@ const NavBar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">{links}</div>
           {/* Actions */}
-          <div className="flex items-center space-x-3 relative">
+          <div className="flex items-center relative">
             {/* Theme Toggle button*/}
             <ThemeToggle />
 
@@ -182,17 +182,17 @@ const NavBar = () => {
                     </button>
                   </div>
                 </div>
-                <button
+                {/* <button
                   onClick={handleLogout}
                   className="hidden md:inline-flex items-center justify-center btn btn-secondary text-base-100 rounded-3xl transition h-10 px-6 ml-2"
                 >
                   Log Out
-                </button>
+                </button> */}
               </>
             ) : (
               <Link
                 to="/login"
-                className="hidden md:inline-flex items-center justify-center btn btn-secondary text-base-100 rounded-3xl transition h-10 px-6"
+                className="hidden md:inline-flex items-center justify-center btn btn-secondary text-base-100 rounded-3xl transition h-10 px-6 ml-3"
               >
                 Log In
               </Link>
