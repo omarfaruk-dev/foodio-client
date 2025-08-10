@@ -28,9 +28,9 @@ const AllFoods = () => {
     }, [items, sort]);
 
     return (
-        <div className="max-w-7xl mx-auto mt-16 pb-10 md:pb-20">
+        <div className="mt-16 mb-10 md:mb-16 lg:mb-20">
             <header
-                className="w-full h-80 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 md:mb-16 lg:mb-20 relative"
+                className="w-full h-80 bg-cover bg-center py-16 flex items-center justify-center shadow-md mb-10 relative"
                 style={{ backgroundImage: `url('${coverImg}')` }}
             >
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/60 via-secondary/20 to-black/50"></div>
@@ -40,7 +40,7 @@ const AllFoods = () => {
             </header>
 
             {/* Search & Sort */}
-            <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-3 mb-10 px-2">
+            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-3 mb-10 px-2">
                 {/* Search */}
                 <div className="relative flex-1 max-w-xs md:max-w-sm w-full">
                     <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500 text-xl z-20 pointer-events-none">
