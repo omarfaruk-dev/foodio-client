@@ -55,6 +55,15 @@ const AllFoods = () => {
                         onChange={e => setSearch(e.target.value)}
                         autoComplete="off"
                     />
+                    {search && (
+                        <button
+                            onClick={() => setSearch("")}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 btn btn-ghost btn-xs text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1"
+                            title="Clear search"
+                        >
+                            ✕
+                        </button>
+                    )}
                 </div>
 
                 {/* Sort options */}
@@ -97,6 +106,30 @@ const AllFoods = () => {
                     </div>
                 </div>
             </div>
+
+            {/* No results message */}
+            {search && sortedItems.length === 0 && (
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 mb-8">
+                    <div className="text-center py-12">
+                        <div className="flex justify-center items-center mb-4">
+                            <FiSearch className="text-6xl text-secondary animate-bounce" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-primary mb-2">No foods found</h3>
+                        <p className="text-accent mb-4">
+                            No food items match your search for "<span className="font-semibold text-secondary">{search}</span>"
+                        </p>
+                        <p className="text-sm text-gray-500 mb-6">
+                            Try adjusting your search terms or browse all available foods
+                        </p>
+                        <button
+                            onClick={() => setSearch("")}
+                            className="btn btn-secondary btn-outline rounded-3xl px-6"
+                        >
+                            Clear Search & Show All Foods
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* food card container */}
             <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
