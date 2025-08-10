@@ -4,8 +4,15 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('careerLoop-theme');
-      return savedTheme ? savedTheme : 'light';
+      // First check for saved theme
+      const savedTheme = localStorage.getItem('foodio-theme');
+      if (savedTheme) {
+        return savedTheme;
+      }
+      
+      // If no saved theme, check system preference
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return systemTheme;
     }
     return 'light';
   });
@@ -15,8 +22,25 @@ const ThemeToggle = () => {
     document.body.removeAttribute('data-theme');
     document.body.setAttribute('data-theme', theme);
     document.body.style.colorScheme = theme;
-    localStorage.setItem('careerLoop-theme', theme);
+    localStorage.setItem('foodio-theme', theme);
   }, [theme]);
+
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleSystemThemeChange = (e) => {
+      // Only update if user hasn't manually set a theme
+      const savedTheme = localStorage.getItem('foodio-theme');
+      if (!savedTheme) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
