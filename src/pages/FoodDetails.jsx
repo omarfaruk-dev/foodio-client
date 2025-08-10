@@ -1,11 +1,32 @@
 import { Link, useLoaderData } from 'react-router';
 import { FaGlobeAsia, FaBoxOpen, FaStar } from 'react-icons/fa';
+import { useState } from 'react';
+import Spinner from './shared/Spinner';
 
 const FoodDetails = () => {
     const food = useLoaderData();
+    const [isLoading, setIsLoading] = useState(false);
 
     if (!food) {
         return <div className="text-center text-error py-20">Food not found.</div>;
+    }
+
+    const handleButtonClick = (action) => {
+        setIsLoading(true);
+        // Simulate loading time - in real app this would be actual navigation or API call
+        setTimeout(() => {
+            setIsLoading(false);
+            // Here you can add actual navigation logic based on the action
+            if (action === 'back') {
+                window.location.href = '/all-foods';
+            } else if (action === 'purchase') {
+                window.location.href = `/food-purchase/${food._id}`;
+            }
+        }, 1000);
+    };
+
+    if (isLoading) {
+        return <Spinner />;
     }
 
     return (
@@ -81,12 +102,18 @@ const FoodDetails = () => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Link to="/all-foods" className="btn btn-outline btn-secondary rounded-3xl font-semibold shadow-md hover:scale-105 transition-transform">
+                        <button 
+                            onClick={() => handleButtonClick('back')} 
+                            className="btn btn-outline btn-secondary rounded-3xl font-semibold shadow-md hover:scale-105 transition-transform"
+                        >
                             Back to All Foods
-                        </Link>
-                        <Link to={`/food-purchase/${food._id}`} className="btn btn-secondary rounded-3xl font-bold text-white shadow-lg hover:scale-105 hover:bg-secondary/90 transition-transform duration-300">
+                        </button>
+                        <button 
+                            onClick={() => handleButtonClick('purchase')} 
+                            className="btn btn-secondary rounded-3xl font-bold text-white shadow-lg hover:scale-105 hover:bg-secondary/90 transition-transform duration-300"
+                        >
                             Purchase Now
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
