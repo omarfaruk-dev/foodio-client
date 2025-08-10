@@ -30,7 +30,7 @@ const FoodDetails = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto mt-16 px-4 py-8">
+        <div className="max-w-7xl mx-auto mt-16 px-4 py-8 md:py-16 lg:py-24">
             {/* Main Product Section */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
                 {/* Left Side - Product Image */}

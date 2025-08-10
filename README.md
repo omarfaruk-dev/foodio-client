@@ -6,32 +6,19 @@
 
 Foodio is a modern, visually appealing food delivery web application built with React, Vite, and Tailwind CSS. It offers a seamless experience for discovering, ordering, and managing your favorite meals, with a focus on beautiful UI, smooth UX, and robust functionality.
 
-## Features
+## Key Features
 
-- **Home & Hero Section:**
-  - Eye-catching hero slider with food images and catchy taglines.
-  - Clear call-to-action for users to start exploring.
-- **Gallery:**
-  - Infinite scroll gallery of high-quality food images.
-  - Lightbox for full-size image viewing.
-- **Customer Reviews:**
-  - Swiper-powered testimonial slider with real user feedback and avatars.
-  - Animated transitions and modern layout.
-- **Food Details:**
-  - Detailed food cards with floating images, icons, badges, and action buttons.
-- **User Authentication:**
-  - Secure login, signup, and protected routes using Firebase Auth.
-- **Profile & Orders:**
-  - Manage your profile, view your orders, and track your favorite foods.
-- **Add & Edit Foods:**
-  - For vendors/admins: add, edit, and manage food items easily.
-- **Responsive Navigation:**
-  - Sidebar menu for mobile, closes on click.
-  - Smooth transitions and modern iconography.
-- **Footer:**
-  - Quick navigation, user links, and social media integration.
-- **Dark/Light Theme Toggle**
-- **Loading Spinners, Alerts, and Animations**
+- Home & Hero Section with Eye-catching Slider
+- Infinite Scroll Gallery with Lightbox
+- Customer Reviews with Swiper Slider
+- Detailed Food Cards with Action Buttons
+- User Authentication (Login/Signup)
+- Profile & Orders Management
+- Add & Edit Foods for Vendors
+- Responsive Navigation with Sidebar
+- Footer with Quick Navigation
+- Dark/Light Theme Toggle
+- Loading Spinners & Animations
 
 ## Tech Stack
 
@@ -56,6 +43,11 @@ Foodio is a modern, visually appealing food delivery web application built with 
 3. **Start the development server:**
    ```bash
    npm run dev
+   ```
+
+4. **Install additional packages (if needed):**
+   ```bash
+   npm install axios firebase react-icons swiper lottie-react yet-another-react-lightbox react-awesome-reveal sweetalert2
    ```
 
 
