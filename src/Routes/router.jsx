@@ -17,6 +17,9 @@ import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 // import MyOrders from "../pages/MyOrders/MyOrders";
 import OrdersFromApi from "../pages/MyOrders/OrdersFromApi";
 import MyFoodsFromApi from "../pages/MyFoods/MyFoodsFromApi";
+import TermsAndConditions from "../pages/TermsAndConditions";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +43,8 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             {" "}
-            <MyProfile />{" "}
+            <MyProfile />
+            {" "}
           </PrivateRoutes>
         ),
       },
@@ -111,6 +115,18 @@ const router = createBrowserRouter([
       {
         path: "/gallery",
         element: <Gallery />,
+      },
+      {
+        path: "/terms-and-conditions",
+        Component: TermsAndConditions,
+      },
+      {
+        path: "/privacy-policy",
+        Component: PrivacyPolicy,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
     ],
   },

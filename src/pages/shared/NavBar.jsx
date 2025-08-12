@@ -10,6 +10,8 @@ import {
   FaPlus,
   FaRegUserCircle,
   FaListOl,
+  FaPhone,
+  FaPhoneSlash,
 } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
@@ -67,6 +69,12 @@ const NavBar = () => {
         className="flex items-center gap-2 text-primary font-medium hover:text-secondary"
       >
         <FaImages /> Gallery
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className="flex items-center gap-2 text-primary font-medium hover:text-secondary"
+      >
+        <FaPhoneSlash /> Contact Us
       </NavLink>
     </>
   );
