@@ -73,7 +73,7 @@ const Contact = () => {
                         {/* Contact Methods */}
                         <div className="space-y-6">
                             {/* Phone */}
-                            <div className="flex items-start gap-4 p-4 bg-base-100 rounded-xl shadow-lg border border-secondary/20">
+                            <div className="flex items-start gap-4 p-4 bg-secondary/2 rounded-xl shadow-md border border-secondary/20">
                                 <div className="bg-primary/10 p-3 rounded-full">
                                     <FaPhone className="text-2xl text-primary" />
                                 </div>
@@ -89,7 +89,7 @@ const Contact = () => {
                             </div>
 
                             {/* Email */}
-                            <div className="flex items-start gap-4 p-4 bg-base-100 rounded-xl shadow-lg border border-secondary/20">
+                            <div className="flex items-start gap-4 p-4 bg-secondary/2 rounded-xl shadow-md border border-secondary/20">
                                 <div className="bg-secondary/10 p-3 rounded-full">
                                     <FaEnvelope className="text-2xl text-secondary" />
                                 </div>
@@ -106,7 +106,7 @@ const Contact = () => {
                             </div>
 
                             {/* Address */}
-                            <div className="flex items-start gap-4 p-4 bg-base-100 rounded-xl shadow-lg border border-secondary/20">
+                            <div className="flex items-start gap-4 p-4 bg-secondary/2 rounded-xl shadow-md border border-secondary/20">
                                 <div className="bg-primary/10 p-3 rounded-full">
                                     <FaMapMarkerAlt className="text-2xl text-primary" />
                                 </div>
@@ -121,40 +121,23 @@ const Contact = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Business Hours */}
-                            <div className="flex items-start gap-4 p-4 bg-base-100 rounded-xl shadow-lg border border-secondary/20">
-                                <div className="bg-secondary/10 p-3 rounded-full">
-                                    <FaClock className="text-2xl text-secondary" />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-primary mb-1">Business Hours</h3>
-                                    <p className="text-accent mb-2">When we're available</p>
-                                    <div className="space-y-1">
-                                        <p className="font-medium text-secondary">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                                        <p className="font-medium text-secondary">Saturday: 10:00 AM - 4:00 PM EST</p>
-                                        <p className="font-medium text-secondary">Sunday: Closed</p>
-                                        <p className="text-sm text-accent">24/7 online support available</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         {/* Social Media */}
-                        <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl p-6 border border-secondary/20">
+                        <div className="bg-secondary/2 rounded-xl p-6 border border-secondary/20">
                             <h3 className="text-xl font-bold text-primary mb-4 text-center">Follow Us</h3>
                             <div className="flex justify-center gap-4">
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary/20 transition-colors">
-                                    <FaFacebook className="text-2xl text-primary" />
+                                <a href="#" className="bg-blue-500/10 p-3 rounded-full hover:bg-blue-500/20 transition-colors">
+                                    <FaFacebook className="text-2xl text-blue-600" />
                                 </a>
-                                <a href="#" className="bg-secondary/10 p-3 rounded-full hover:bg-secondary/20 transition-colors">
-                                    <FaTwitter className="text-2xl text-secondary" />
+                                <a href="#" className="bg-blue-400/10 p-3 rounded-full hover:bg-blue-400/20 transition-colors">
+                                    <FaTwitter className="text-2xl text-blue-400" />
                                 </a>
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary/20 transition-colors">
-                                    <FaInstagram className="text-2xl text-primary" />
+                                <a href="#" className="bg-pink-500/10 p-3 rounded-full hover:bg-pink-500/20 transition-colors">
+                                    <FaInstagram className="text-2xl text-pink-500" />
                                 </a>
-                                <a href="#" className="bg-secondary/10 p-3 rounded-full hover:bg-secondary/20 transition-colors">
-                                    <FaLinkedin className="text-2xl text-secondary" />
+                                <a href="#" className="bg-blue-600/10 p-3 rounded-full hover:bg-blue-600/20 transition-colors">
+                                    <FaLinkedin className="text-2xl text-blue-600" />
                                 </a>
                             </div>
                             <p className="text-center text-sm text-accent mt-3">
@@ -163,103 +146,88 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    {/* Contact Form */}
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-bold text-primary mb-6">Send us a Message</h2>
-                        
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Name */}
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
-                                    <FaUser className="inline mr-2" />
-                                    Full Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                    required
-                                    className="w-full px-4 py-3 border border-secondary/30 rounded-xl focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all bg-base-100 text-accent"
-                                    placeholder="Enter your full name"
-                                />
-                            </div>
+                                {/* Contact Form */}
+            <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-primary mb-6">Send us a Message</h2>
+                
+                <form onSubmit={handleSubmit} className="space-y-6 bg-secondary/2 shadow-md rounded-xl p-6 border border-secondary/30">
+                    {/* Name */}
+                    <div>
+                        <label className="block text-sm font-medium text-primary mb-1">Full Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                            placeholder="Enter your full name"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
+                        />
+                    </div>
 
-                            {/* Email */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
-                                    <FaEnvelope className="inline mr-2" />
-                                    Email Address *
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleInputChange}
-                                    required
-                                    className="w-full px-4 py-3 border border-secondary/30 rounded-xl focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all bg-base-100 text-accent"
-                                    placeholder="Enter your email address"
-                                />
-                            </div>
+                    {/* Email */}
+                    <div>
+                        <label className="block text-sm font-medium text-primary mb-1">Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            placeholder="Enter your email address"
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
+                        />
+                    </div>
 
-                            {/* Subject */}
-                            <div>
-                                <label htmlFor="subject" className="block text-sm font-medium text-primary mb-2">
-                                    <FaComments className="inline mr-2" />
-                                    Subject *
-                                </label>
-                                <select
-                                    id="subject"
-                                    name="subject"
-                                    value={formData.subject}
-                                    onChange={handleInputChange}
-                                    required
-                                    className="w-full px-4 py-3 border border-secondary/30 rounded-xl focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all bg-base-100 text-accent"
-                                >
-                                    <option value="">Select a subject</option>
-                                    <option value="general">General Inquiry</option>
-                                    <option value="support">Technical Support</option>
-                                    <option value="order">Order Issue</option>
-                                    <option value="delivery">Delivery Problem</option>
-                                    <option value="payment">Payment Issue</option>
-                                    <option value="feedback">Feedback & Suggestions</option>
-                                    <option value="business">Business Partnership</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
+                    {/* Subject */}
+                    <div>
+                        <label className="block text-sm font-medium text-primary mb-1">Subject</label>
+                        <select
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleInputChange}
+                            required
+                            className="input input-bordered w-full rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary"
+                        >
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="order">Order Issue</option>
+                            <option value="delivery">Delivery Problem</option>
+                            <option value="payment">Payment Issue</option>
+                            <option value="feedback">Feedback & Suggestions</option>
+                            <option value="business">Business Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
 
-                            {/* Message */}
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
-                                    <FaComments className="inline mr-2" />
-                                    Message *
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleInputChange}
-                                    required
-                                    rows="5"
-                                    className="w-full px-4 py-3 border border-secondary/30 rounded-xl focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all bg-base-100 text-accent resize-none"
-                                    placeholder="Tell us how we can help you..."
-                                ></textarea>
-                            </div>
+                    {/* Message */}
+                    <div>
+                        <label className="block text-sm font-medium text-primary mb-1">Message</label>
+                        <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                            required
+                            rows="8"
+                            placeholder="Tell us how we can help you..."
+                            className="input h-30 input-bordered w-full py-2 rounded-3xl focus:outline-none focus:ring-1 focus:ring-secondary overflow-x-hidden overflow-y-auto whitespace-pre-wrap break-words"
+                        ></textarea>
+                    </div>
 
-                            {/* Submit Button */}
-                            <button
-                                type="submit"
-                                className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 px-6 rounded-xl hover:from-primary/90 hover:to-secondary/90 transform hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
-                            >
-                                <FaPaperPlane className="text-lg" />
-                                Send Message
-                            </button>
-                        </form>
+                    {/* Submit Button */}
+                    <div className="text-center">
+                        <button
+                            type="submit"
+                            className="btn btn-secondary text-white px-6 py-2 rounded-3xl hover:bg-opacity-90 transition duration-300"
+                        >
+                            <FaPaperPlane /> Send Message
+                        </button>
+                    </div>
+                </form>
 
                         {/* Additional Contact Options */}
-                        <div className="bg-gradient-to-r from-secondary/5 to-primary/5 rounded-xl p-6 border border-secondary/20">
+                        <div className="bg-secondary/2 rounded-xl p-6 border border-secondary/20">
                             <h3 className="text-xl font-bold text-primary mb-4 text-center">Quick Contact Options</h3>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3 p-3 bg-base-100 rounded-lg">
@@ -285,19 +253,19 @@ const Contact = () => {
                 <div className="mt-16">
                     <h2 className="text-3xl font-bold text-primary mb-8 text-center">Frequently Asked Questions</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-secondary/20">
+                        <div className="bg-base-100 rounded-xl p-6 shadow-md border border-secondary/20">
                             <h3 className="text-lg font-semibold text-primary mb-2">How do I track my order?</h3>
                             <p className="text-accent">You can track your order in real-time through our app or website. We'll also send you SMS updates throughout the delivery process.</p>
                         </div>
-                        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-secondary/20">
+                        <div className="bg-base-100 rounded-xl p-6 shadow-md border border-secondary/20">
                             <h3 className="text-lg font-semibold text-primary mb-2">What if my food arrives late?</h3>
                             <p className="text-accent">If your delivery is significantly delayed, please contact us immediately. We'll work to resolve the issue and may offer compensation.</p>
                         </div>
-                        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-secondary/20">
+                        <div className="bg-base-100 rounded-xl p-6 shadow-md border border-secondary/20">
                             <h3 className="text-lg font-semibold text-primary mb-2">How can I report a problem?</h3>
                             <p className="text-accent">You can report any issues through our contact form, call our support line, or use the in-app support feature for immediate assistance.</p>
                         </div>
-                        <div className="bg-base-100 rounded-xl p-6 shadow-lg border border-secondary/20">
+                        <div className="bg-base-100 rounded-xl p-6 shadow-md border border-secondary/20">
                             <h3 className="text-lg font-semibold text-primary mb-2">Do you offer refunds?</h3>
                             <p className="text-accent">Yes, we offer refunds for orders that don't meet our quality standards. Please contact us within 30 minutes of delivery for food-related issues.</p>
                         </div>
