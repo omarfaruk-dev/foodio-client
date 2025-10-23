@@ -84,16 +84,19 @@ const SignUp = () => {
       }
 
       createUser(form.email, form.password)
-          .then((userCredential) => {
+          .then(async (userCredential) => {
               const currentUser = userCredential.user;
+              
+              // Update user profile
               updateUser({ displayName: form.name, photoURL: form.photo })
-                  .then(() => {
-                      const updatedUser = {
-                          ...currentUser,
-                          displayName: form.name,
-                          photoURL: form.photo,
-                      };
-                      setUser(updatedUser);
+                  .then(async () => {
+                      // Get Firebase token and save to localStorage
+                      const token = await currentUser.getIdToken();
+                      localStorage.setItem('foodio-token', token);
+                      
+                      // Don't manually set user - let Firebase onAuthStateChanged handle it
+                      // Redux will be updated automatically via AuthProvider
+                      
                       Swal.fire({
                           position: "center",
                           icon: "success",
@@ -101,10 +104,14 @@ const SignUp = () => {
                           showConfirmButton: false,
                           timer: 1500,
                       });
-                       navigate(location.state || '/');
+                      
+                      // Navigate after a short delay to let Redux update
+                      setTimeout(() => {
+                          navigate(location.state || '/');
+                      }, 100);
                   })
                   .catch((error) => {
-                      console.log("Update failed", error);
+                      console.error("Update profile failed:", error);
                       Swal.fire({
                           icon: "error",
                           title: "Oops...",
@@ -113,7 +120,6 @@ const SignUp = () => {
                   });
           })
           .catch((error) => {
-
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -130,15 +136,14 @@ const SignUp = () => {
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((userCredential) => {
-        const currentUser = userCredential.user;
-        const updateUser = {
-          email: currentUser.email,
-          displayName: currentUser.displayName,
-          photoURL: currentUser.photoURL,
-        };
-        setUser(updateUser);
-        navigate(location.state || "/");
+      .then(async (result) => {
+        // Get Firebase token and save to localStorage
+        const token = await result.user.getIdToken();
+        localStorage.setItem('foodio-token', token);
+        
+        // Don't manually set user - let Firebase onAuthStateChanged handle it
+        // Redux will be updated automatically via AuthProvider
+        
         Swal.fire({
           position: "center",
           icon: "success",
@@ -146,6 +151,11 @@ const SignUp = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        
+        // Navigate after a short delay to let Redux update
+        setTimeout(() => {
+          navigate(location.state || "/");
+        }, 100);
       })
       .catch((error) => {
         const message = error.message;

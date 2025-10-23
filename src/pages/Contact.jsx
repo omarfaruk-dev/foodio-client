@@ -20,8 +20,8 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formData);
+        // Handle form submission logic here (can integrate with backend API)
+        
         // Reset form
         setFormData({
             name: '',
@@ -29,6 +29,7 @@ const Contact = () => {
             subject: '',
             message: ''
         });
+        
         // Show success message with SweetAlert2
         Swal.fire({
             title: 'Message Sent Successfully!',

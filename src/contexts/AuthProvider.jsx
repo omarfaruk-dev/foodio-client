@@ -35,17 +35,25 @@ const AuthProvider = ({ children }) => {
 
     // Firebase auth state observer - updates Redux
     useEffect(() => {
+        dispatch(setLoading(true)); // Start loading
+        
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 // Get Firebase ID token and store it
-                const token = await currentUser.getIdToken();
-                localStorage.setItem('foodio-token', token);
+                try {
+                    const token = await currentUser.getIdToken();
+                    localStorage.setItem('foodio-token', token);
+                } catch (error) {
+                    console.error('Token error:', error);
+                }
             } else {
                 localStorage.removeItem('foodio-token');
             }
             
+            // Update Redux state
             dispatch(setUser(currentUser));
         })
+        
         return () => {
             unsubscribe();
         }
