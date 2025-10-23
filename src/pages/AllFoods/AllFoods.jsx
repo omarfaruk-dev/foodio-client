@@ -3,7 +3,8 @@ import coverImg from '../../assets/images/header/food-bg3.jpg';
 import FoodCard from './FoodCard';
 import { FiSearch } from 'react-icons/fi';
 import { useGetAllFoodsQuery } from '../../store/api/foodsApi';
-import Spinner from '../shared/Spinner';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const AllFoods = () => {
     // Local UI state (useState)
@@ -12,6 +13,29 @@ const AllFoods = () => {
 
     // RTK Query - Automatic data fetching, caching, and loading states
     const { data: items = [], isLoading, isError, error } = useGetAllFoodsQuery(search);
+
+    // Skeleton Card Component - matches FoodCard styling
+    const SkeletonFoodCard = () => (
+        <div className="card bg-base-100 border border-secondary/20 shadow-md hover:shadow-lg flex flex-col h-full rounded-2xl overflow-hidden">
+            <div className="relative">
+                <Skeleton height={192} containerClassName="block" />
+            </div>
+            <div className="card-body flex flex-col flex-1 p-4">
+                <div className="flex items-center justify-between mb-2">
+                    <Skeleton width="70%" height={24} />
+                    <Skeleton width={50} height={20} />
+                </div>
+                <Skeleton count={2} className="mb-2" />
+                <div className="flex flex-wrap gap-2 mb-3">
+                    <Skeleton width={60} height={20} borderRadius={20} />
+                    <Skeleton width={70} height={20} borderRadius={20} />
+                </div>
+                <div className="mt-auto pt-2">
+                    <Skeleton height={36} className="rounded-3xl" />
+                </div>
+            </div>
+        </div>
+    );
 
     // Frontend sorting logic
     const sortedItems = useMemo(() => {
@@ -25,23 +49,6 @@ const AllFoods = () => {
         }
         return sorted;
     }, [items, sort]);
-
-    // Show loading spinner
-    if (isLoading) {
-        return <Spinner />;
-    }
-
-    // Show error message
-    if (isError) {
-        return (
-            <div className="mt-16 min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <h2 className="text-2xl font-bold text-error mb-4">Error Loading Foods</h2>
-                    <p className="text-accent">{error?.message || 'Something went wrong!'}</p>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="mt-16 mb-10 md:mb-16 lg:mb-20">
@@ -123,8 +130,29 @@ const AllFoods = () => {
                 </div>
             </div>
 
+            {/* Error message */}
+            {isError && (
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 mb-8">
+                    <div className="text-center py-12">
+                        <h2 className="text-2xl font-bold text-error mb-4">Error Loading Foods</h2>
+                        <p className="text-accent">{error?.message || 'Something went wrong!'}</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Loading skeleton cards */}
+            {isLoading && (
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+                        {[...Array(12)].map((_, index) => (
+                            <SkeletonFoodCard key={index} />
+                        ))}
+                    </div>
+                </div>
+            )}
+
             {/* No results message */}
-            {search && sortedItems.length === 0 && (
+            {!isLoading && !isError && search && sortedItems.length === 0 && (
                 <div className="max-w-7xl mx-auto px-2 sm:px-4 mb-8">
                     <div className="text-center py-12">
                         <div className="flex justify-center items-center mb-4">
@@ -148,11 +176,13 @@ const AllFoods = () => {
             )}
 
             {/* food card container */}
-            <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-                    {sortedItems.map(item => <FoodCard key={item._id} item={item} />)}
+            {!isLoading && !isError && sortedItems.length > 0 && (
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+                        {sortedItems.map(item => <FoodCard key={item._id} item={item} />)}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
