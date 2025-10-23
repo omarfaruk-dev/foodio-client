@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import coverImg from '../../assets/images/header/food-bg3.jpg';
 import FoodCard from './FoodCard';
 import { FiSearch } from 'react-icons/fi';
+import { useGetAllFoodsQuery } from '../../store/api/foodsApi';
+import Spinner from '../shared/Spinner';
 
 const AllFoods = () => {
-    const [items, setItems] = useState([]);
+    // Local UI state (useState)
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("");
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/foods?search=${search}`)
-            .then((res) => res.json())
-            .then((data) => setItems(data));
-    }, [search]);
+    // RTK Query - Automatic data fetching, caching, and loading states
+    const { data: items = [], isLoading, isError, error } = useGetAllFoodsQuery(search);
 
     // Frontend sorting logic
     const sortedItems = useMemo(() => {
@@ -26,6 +25,23 @@ const AllFoods = () => {
         }
         return sorted;
     }, [items, sort]);
+
+    // Show loading spinner
+    if (isLoading) {
+        return <Spinner />;
+    }
+
+    // Show error message
+    if (isError) {
+        return (
+            <div className="mt-16 min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold text-error mb-4">Error Loading Foods</h2>
+                    <p className="text-accent">{error?.message || 'Something went wrong!'}</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-16 mb-10 md:mb-16 lg:mb-20">
