@@ -6,6 +6,7 @@ import DeviceSupport from './DeviceSupport';
 import CustomerReview from './CustomerReview';
 import WhyChooseFoodio from './WhyChooseFoodio';
 import GetStartedToday from './GetStartedToday';
+import FAQ from './FAQ';
 
 const Home = () => {
     return (
@@ -30,6 +31,9 @@ const Home = () => {
             </section>
             <section>
                 <GetStartedToday />
+            </section>
+            <section>
+                <FAQ />
             </section>
         </>
     );

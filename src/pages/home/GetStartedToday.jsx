@@ -9,25 +9,25 @@ const GetStartedToday = () => {
             icon: <FaUserPlus className="text-3xl" />,
             title: "Create Account",
             description: "Sign up in seconds with your email or Google account",
-            color: "text-blue-500",
-            bgColor: "bg-blue-50",
-            borderColor: "border-blue-200"
+            color: "text-info",
+            bgColor: "bg-info/5",
+            borderColor: "border-info/20"
         },
         {
             icon: <FaUtensils className="text-3xl" />,
             title: "Browse & Order",
             description: "Explore thousands of dishes from local chefs and place your order",
-            color: "text-green-500",
-            bgColor: "bg-green-50",
-            borderColor: "border-green-200"
+            color: "text-success",
+            bgColor: "bg-success/5",
+            borderColor: "border-success/20"
         },
         {
             icon: <FaRocket className="text-3xl" />,
             title: "Enjoy Delivery",
             description: "Get your delicious food delivered fresh to your doorstep",
-            color: "text-purple-500",
-            bgColor: "bg-purple-50",
-            borderColor: "border-purple-200"
+            color: "text-secondary",
+            bgColor: "bg-secondary/5",
+            borderColor: "border-secondary/20"
         }
     ];
 
@@ -35,17 +35,20 @@ const GetStartedToday = () => {
         {
             icon: <FaGift className="text-2xl" />,
             title: "Welcome Bonus",
-            description: "Get $5 off your first order"
+            description: "Get $5 off your first order",
+            color: "text-warning"
         },
         {
             icon: <FaHeart className="text-2xl" />,
             title: "Free Delivery",
-            description: "On orders above $25"
+            description: "On orders above $25",
+            color: "text-error"
         },
         {
             icon: <FaDownload className="text-2xl" />,
             title: "Mobile App",
-            description: "Download our app for better experience"
+            description: "Download our app for better experience",
+            color: "text-info"
         }
     ];
 
@@ -103,7 +106,7 @@ const GetStartedToday = () => {
                     {benefits.map((benefit, index) => (
                         <Fade key={index} delay={index * 100}>
                             <div className="bg-base-100 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                                <div className="text-secondary mb-4 flex justify-center">
+                                <div className={`${benefit.color} mb-4 flex justify-center`}>
                                     {benefit.icon}
                                 </div>
                                 <h4 className="text-lg font-bold text-primary mb-2">{benefit.title}</h4>
