@@ -73,16 +73,16 @@ const GetStartedToday = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 {steps.map((step, index) => (
                     <Fade key={index} delay={index * 200}>
-                        <div className={`${step.bgColor} ${step.borderColor} border-2 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group relative`}>
+                        <div className={`${step.bgColor} ${step.borderColor} border-2 rounded-2xl p-8 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group relative`}>
                             {/* Step Number */}
-                            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-sm">
+                            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-sm group-hover:scale-110 transition-transform duration-700">
                                 {index + 1}
                             </div>
                             
-                            <div className={`${step.color} mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center`}>
+                            <div className={`${step.color} mb-6 group-hover:scale-110 transition-transform duration-700 flex justify-center`}>
                                 {step.icon}
                             </div>
-                            <h3 className="text-xl font-bold text-primary mb-4">{step.title}</h3>
+                            <h3 className="text-xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-700">{step.title}</h3>
                             <p className="text-accent leading-relaxed">{step.description}</p>
                         </div>
                     </Fade>
@@ -105,11 +105,11 @@ const GetStartedToday = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {benefits.map((benefit, index) => (
                         <Fade key={index} delay={index * 100}>
-                            <div className="bg-base-100 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                                <div className={`${benefit.color} mb-4 flex justify-center`}>
+                            <div className="bg-base-100 rounded-2xl p-6 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group border border-secondary/10">
+                                <div className={`${benefit.color} mb-4 flex justify-center group-hover:scale-110 transition-transform duration-700`}>
                                     {benefit.icon}
                                 </div>
-                                <h4 className="text-lg font-bold text-primary mb-2">{benefit.title}</h4>
+                                <h4 className="text-lg font-bold text-primary mb-2 group-hover:text-secondary transition-colors duration-700">{benefit.title}</h4>
                                 <p className="text-accent text-sm">{benefit.description}</p>
                             </div>
                         </Fade>
