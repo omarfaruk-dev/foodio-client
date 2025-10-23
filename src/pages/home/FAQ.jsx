@@ -97,23 +97,23 @@ const FAQ = () => {
             </div>
 
             {/* FAQ Accordion */}
-            <div className="max-w-4xl mx-auto mb-16">
+            <div className="mb-16">
                 <div className="space-y-4">
                     {faqs.map((faq, index) => (
                         <Fade key={index} delay={index * 50}>
-                            <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 border-2 border-secondary/10 hover:border-secondary/30 hover:-translate-y-2 group">
+                            <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-3xl shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all border-2 border-secondary/10 hover:border-secondary/30 group">
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-base-200/50 transition-colors duration-300 rounded-3xl"
+                                    className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-base-200/50 transition-colors duration-700 rounded-3xl"
                                 >
-                                    <h3 className="text-lg md:text-xl font-semibold text-primary pr-4 group-hover:text-secondary transition-colors duration-300">
+                                    <h3 className="text-lg md:text-xl font-semibold text-primary pr-4 group-hover:text-secondary transition-colors duration-700">
                                         {faq.question}
                                     </h3>
                                     <div className="flex-shrink-0">
                                         {openIndex === index ? (
-                                            <FaChevronUp className="text-secondary text-xl group-hover:scale-110 transition-transform duration-300" />
+                                            <FaChevronUp className="text-secondary text-xl group-hover:scale-110 transition-transform duration-700" />
                                         ) : (
-                                            <FaChevronDown className="text-secondary text-xl group-hover:scale-110 transition-transform duration-300" />
+                                            <FaChevronDown className="text-secondary text-xl group-hover:scale-110 transition-transform duration-700" />
                                         )}
                                     </div>
                                 </button>
@@ -148,11 +148,11 @@ const FAQ = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {contactMethods.map((method, index) => (
                     <Fade key={index} delay={index * 150}>
-                        <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-3xl p-6 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 border-secondary/10 hover:border-secondary/30 group">
-                            <div className={`${method.color} mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-3xl p-6 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all border-2 border-secondary/10 hover:border-secondary/30 group">
+                            <div className={`${method.color} mb-4 flex justify-center group-hover:scale-110 transition-transform duration-700`}>
                                 {method.icon}
                             </div>
-                            <h4 className="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors duration-300">{method.title}</h4>
+                            <h4 className="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors duration-700">{method.title}</h4>
                             <p className="text-accent text-sm mb-3">{method.description}</p>
                             <p className="text-secondary font-semibold">{method.contact}</p>
                         </div>
@@ -175,10 +175,10 @@ const FAQ = () => {
                             We're committed to making your Foodio experience as smooth as possible!
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="btn btn-secondary text-white px-8 py-4 rounded-3xl font-semibold hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl">
+                            <button className="btn btn-secondary text-white px-8 py-4 rounded-3xl font-semibold hover:scale-105 transition-transform duration-700 shadow-md hover:shadow-lg">
                                 Visit Help Center
                             </button>
-                            <button className="btn btn-outline btn-secondary px-8 py-4 rounded-3xl font-semibold hover:bg-secondary hover:text-white transition-all duration-300 border-2 hover:border-secondary">
+                            <button className="btn btn-outline btn-secondary px-8 py-4 rounded-3xl font-semibold hover:bg-secondary hover:text-white transition-all duration-700 border-2 hover:border-secondary">
                                 Contact Support
                             </button>
                         </div>

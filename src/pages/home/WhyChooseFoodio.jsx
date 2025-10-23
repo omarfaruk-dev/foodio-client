@@ -82,11 +82,11 @@ const WhyChooseFoodio = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
                 {stats.map((stat, index) => (
                     <Fade key={index} delay={index * 150}>
-                        <div className="text-center bg-gradient-to-br from-base-100 to-base-200 rounded-3xl p-8 border-2 border-secondary/10 hover:border-secondary/30 hover:shadow-2xl transition-all duration-500 group">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div className="text-center bg-gradient-to-br from-base-100 to-base-200 rounded-3xl p-8 border-2 border-secondary/10 hover:border-secondary/30 shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group">
+                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-700">
                                 {stat.icon}
                             </div>
-                            <div className="text-3xl md:text-4xl font-bold text-secondary mb-2 group-hover:text-primary transition-colors duration-300">
+                            <div className="text-3xl md:text-4xl font-bold text-secondary mb-2 group-hover:text-primary transition-colors duration-700">
                                 {stat.number}
                             </div>
                             <div className="text-sm text-accent font-semibold uppercase tracking-wide">
@@ -101,15 +101,15 @@ const WhyChooseFoodio = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {features.map((feature, index) => (
                     <Fade key={index} delay={index * 150}>
-                        <div className={`${feature.bgColor} ${feature.borderColor} border-2 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group relative overflow-hidden`}>
+                        <div className={`${feature.bgColor} ${feature.borderColor} border-2 rounded-3xl p-8 shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group relative overflow-hidden`}>
                             {/* Background Pattern */}
                             <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-secondary/5 to-transparent rounded-full -translate-y-10 translate-x-10"></div>
                             
                             <div className="relative z-10">
-                                <div className={`${feature.color} mb-6 group-hover:scale-110 transition-transform duration-500 flex justify-center`}>
+                                <div className={`${feature.color} mb-6 group-hover:scale-110 transition-transform duration-700 flex justify-center`}>
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-300">
+                                <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-700">
                                     {feature.title}
                                 </h3>
                                 <p className="text-accent leading-relaxed text-base">
