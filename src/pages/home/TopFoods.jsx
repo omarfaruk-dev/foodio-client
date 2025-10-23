@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TopFoodsCard from './TopFoodsCard';
 import Spinner from '../shared/Spinner';
 import { Slide } from 'react-awesome-reveal';
+import { useGetTopFoodsQuery } from '../../store/api/foodsApi';
 
 const TopFoods = () => {
-    const [topFoods, setTopFoods] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/top-foods`)
-            .then(res => res.json())
-            .then(data => setTopFoods(data || []))
-            .finally(() => setLoading(false));
-    }, []);
+    // RTK Query - Automatic data fetching, caching, and loading states
+    const { data: topFoods = [], isLoading: loading, isError } = useGetTopFoodsQuery();
 
     return (
         <div className='max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-24'>
@@ -29,6 +23,8 @@ const TopFoods = () => {
                 </Slide>
                 {loading ? (
                     <Spinner/>
+                ) : isError ? (
+                    <div className="text-center text-error py-10">Error loading top foods. Please try again.</div>
                 ) : topFoods.length === 0 ? (
                     <div className="text-center text-accent py-10">No top foods found.</div>
                 ) : (
