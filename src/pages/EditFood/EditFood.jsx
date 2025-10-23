@@ -5,11 +5,17 @@ import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { useLoaderData } from 'react-router';
+import { useUpdateFoodMutation } from '../../store/api/foodsApi';
 
 const EditFood = () => {
     const food = useLoaderData();
     const { user } = useAuth();
     const navigate = useNavigate();
+    
+    // RTK Query mutation for updating food
+    const [updateFood, { isLoading: isUpdating }] = useUpdateFoodMutation();
+    
+    // Local state for form errors and form data
     const [errors, setErrors] = useState({});
     // Pre-fill form with food data
     const [formState, setFormState] = useState({
@@ -55,16 +61,15 @@ const EditFood = () => {
         updatedFood.user_email = user.email;
         updatedFood.food_category = foodCategories;
         updatedFood.ingredients = updatedFood.ingredients.split(',').map(i => i.trim()).filter(Boolean);
-        // send to db (PUT with email query param)
-        fetch(`${import.meta.env.VITE_API_URL}/foods/${food._id}?email=${user.email}`, {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatedFood)
+        
+        // Send to DB using RTK Query mutation
+        updateFood({ 
+            id: food._id, 
+            email: user.email, 
+            updatedFood 
         })
-            .then(res => res.json())
-            .then(data => {
+            .unwrap()
+            .then((data) => {
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         position: "center",
@@ -89,7 +94,7 @@ const EditFood = () => {
                 console.error("Error Updating Food Data:", err);
                 Swal.fire({
                     title: "Error!",
-                    text: `Something went wrong! ${err.message}`,
+                    text: err?.data?.message || `Something went wrong! ${err.message}`,
                     icon: "error",
                 });
             })
@@ -315,9 +320,18 @@ const EditFood = () => {
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="btn btn-secondary text-white px-6 py-2 rounded-3xl border hover:bg-opacity-90 transition duration-300"
+                        disabled={isUpdating}
+                        className="btn btn-secondary text-white px-6 py-2 rounded-3xl border hover:bg-opacity-90 transition duration-300 disabled:opacity-50"
                     >
-                        <FaPlus /> Update Food
+                        {isUpdating ? (
+                            <>
+                                <span className="loading loading-spinner loading-sm"></span> Updating...
+                            </>
+                        ) : (
+                            <>
+                                <FaPlus /> Update Food
+                            </>
+                        )}
                     </button>
                 </div>
             </form>
