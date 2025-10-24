@@ -7,9 +7,9 @@ import { useAddToWishlistMutation } from '../../store/api/wishlistApi';
 import Swal from 'sweetalert2';
 
 const TopFoodsCard = ({ food }) => {
-  const [fav, setFav] = useState(false);
   const { user } = useAuth();
   const [addToWishlist, { isLoading: isAddingToWishlist }] = useAddToWishlistMutation();
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
@@ -50,6 +50,7 @@ const TopFoodsCard = ({ food }) => {
       .unwrap()
       .then((res) => {
         if (res.insertedId) {
+          setIsInWishlist(true);
           Swal.fire({
             icon: "success",
             title: "Added to Wishlist!",
@@ -93,11 +94,12 @@ const TopFoodsCard = ({ food }) => {
           </div>
           <button
             className="absolute top-2 left-2 bg-white text-error p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-secondary/50 transition z-10"
-            onClick={() => setFav((f) => !f)}
-            aria-label={fav ? "Remove from favorites" : "Add to favorites"}
+            onClick={handleAddToWishlist}
+            disabled={isAddingToWishlist}
+            aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
             type="button"
           >
-            {fav ? (
+            {isInWishlist ? (
               <FaHeart className="text-error text-lg" />
             ) : (
               <FaRegHeart className="text-error text-lg" />
@@ -133,21 +135,13 @@ const TopFoodsCard = ({ food }) => {
             {food.details}
           </p>
          
-          <div className="mt-3 flex gap-2">
+          <div className="mt-3">
             <Link
               to={`/item-details/${food._id}`}
-              className="btn btn-secondary btn-sm lg:btn-md flex-1 font-semibold text-white rounded-3xl shadow hover:scale-102 transition-transform duration-200"
+              className="btn btn-secondary btn-sm lg:btn-md w-full font-semibold text-white rounded-3xl shadow hover:scale-102 transition-transform duration-200"
             >
               See Details
             </Link>
-            <button
-              onClick={handleAddToWishlist}
-              disabled={isAddingToWishlist}
-              className="btn btn-sm btn-outline btn-error rounded-3xl disabled:opacity-50"
-              title="Add to wishlist"
-            >
-              <FaHeart className="text-lg" />
-            </button>
           </div>
         </div>
       </div>

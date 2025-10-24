@@ -8,7 +8,8 @@ import Lottie from 'lottie-react';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { Fade } from 'react-awesome-reveal';
-import { FaHeart, FaShoppingCart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
+import { MdDeleteForever } from "react-icons/md";
 
 // Skeleton Loading Component
 const WishlistSkeleton = () => {
@@ -134,9 +135,20 @@ const Wishlist = () => {
                     alt={food.food_name}
                     className="w-full h-44 sm:h-48 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                   />
+                  {/* Remove from wishlist button - top left */}
+                  <button
+                    onClick={() => handleRemove(item._id, food.food_name)}
+                    disabled={isRemoving}
+                    className="absolute top-2 left-2 bg-white text-error p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-secondary/50 transition z-10 hover:bg-error hover:text-white disabled:opacity-50"
+                    title="Remove from wishlist"
+                  >
+                    <MdDeleteForever className="text-lg" />
+                  </button>
+                  {/* Food origin badge - top right */}
                   <div className="absolute top-2 right-2 bg-secondary text-base-100 text-xs px-3 py-1 rounded-full shadow font-semibold">
                     {food.food_origin}
                   </div>
+                  {/* Stats badges - bottom */}
                   <div className="absolute bottom-2 left-0 w-full flex items-center justify-between px-4 pointer-events-none">
                     <span className="bg-secondary/90 text-white text-xs px-4 py-1 rounded-full shadow font-semibold flex items-center gap-1 opacity-90">
                       Sold: <span className="font-bold">{food.purchase_count || 0}</span>
@@ -160,18 +172,10 @@ const Wishlist = () => {
                       : food.food_category && <span className="badge bg-secondary/20 rounded-3xl text-xs">{food.food_category}</span>
                     }
                   </div>
-                  <div className="mt-auto pt-2 flex gap-2">
-                    <Link to={`/item-details/${food._id}`} className="btn btn-secondary btn-sm flex-1 font-semibold text-white rounded-3xl">
+                  <div className="mt-auto pt-2">
+                    <Link to={`/item-details/${food._id}`} className="btn btn-secondary btn-sm w-full font-semibold text-white rounded-3xl">
                       See Details
                     </Link>
-                    <button
-                      onClick={() => handleRemove(item._id, food.food_name)}
-                      disabled={isRemoving}
-                      className="btn btn-sm btn-outline btn-error rounded-3xl disabled:opacity-50"
-                      title="Remove from wishlist"
-                    >
-                      <FaHeart className="text-lg" />
-                    </button>
                   </div>
                 </div>
               </div>
