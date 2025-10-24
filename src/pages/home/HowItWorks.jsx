@@ -43,14 +43,14 @@ const HowItWorks = () => {
 					{steps.map((step, idx) => (
 						<li
 							key={step.title}
-							className="mb-12 last:mb-0 flex items-start"
+							className="mb-12 last:mb-0 flex items-start group"
 						>
 							<span
 								className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
 									idx === 0
 										? 'bg-secondary text-white border-secondary'
 										: 'bg-base-100 text-secondary border-secondary/40'
-								} absolute -left-5 top-0`}
+								} absolute -left-5 top-0 group-hover:scale-110 transition-transform duration-700`}
 							>
 								{idx === 0 ? (
 									<svg
@@ -78,11 +78,11 @@ const HowItWorks = () => {
 									</svg>
 								)}
 							</span>
-							<div className="ml-8">
+							<div className="ml-8 bg-base-100 p-5 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all border border-secondary/10">
 								<span className="uppercase text-xs text-secondary font-semibold tracking-widest">
 									Step {idx + 1}
 								</span>
-								<h3 className="text-lg md:text-xl font-bold text-primary mb-1 mt-1">
+								<h3 className="text-lg md:text-xl font-bold text-primary mb-1 mt-1 group-hover:text-secondary transition-colors duration-700">
 									{step.title}
 								</h3>
 								<p className="text-accent text-base max-w-md">

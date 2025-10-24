@@ -5,15 +5,17 @@ import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { Fade } from 'react-awesome-reveal';
-import axios from 'axios';
+import { useAddFoodMutation } from '../../store/api/foodsApi';
 
 const AddFoodsForm = () => {
 
     const { user } = useAuth();
-
     const navigate = useNavigate();
 
-    // Add state for custom error messages
+    // RTK Query mutation for adding food
+    const [addFood, { isLoading: isAdding }] = useAddFoodMutation();
+
+    // Local state for form errors (stays with useState)
     const [errors, setErrors] = useState({});
 
     const handleSubmit = (e) => {
@@ -54,10 +56,11 @@ const AddFoodsForm = () => {
         newFood.price = Number(newFood.price);
         newFood.purchase_count = 0; // Always set as number
 
-        //send to db
-        axios.post(`${import.meta.env.VITE_API_URL}/foods`, newFood)
-            .then(res => {
-                if (res.data.insertedId) {
+        // Send to DB using RTK Query mutation
+        addFood(newFood)
+            .unwrap()
+            .then((res) => {
+                if (res.insertedId) {
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -66,14 +69,14 @@ const AddFoodsForm = () => {
                         timer: 1500
                     });
                     form.reset();
-                    navigate('/all-foods'); // Redirect to all foods page after success
+                    navigate('/all-foods');
                 }
             })
             .catch((err) => {
                 console.error("Error Saving Food Data:", err);
                 Swal.fire({
                     title: "Error!",
-                    text: "Something went wrong while saving food data!",
+                    text: err?.data?.message || "Something went wrong while saving food data!",
                     icon: "error",
                 });
             });
@@ -283,9 +286,18 @@ const AddFoodsForm = () => {
                 <div className="text-center">
                     <button
                         type="submit"
-                        className="btn btn-secondary text-white px-6 py-2 rounded-3xl hover:bg-opacity-90 transition duration-300"
+                        disabled={isAdding}
+                        className="btn btn-secondary text-white px-6 py-2 rounded-3xl hover:bg-opacity-90 transition duration-300 disabled:opacity-50"
                     >
-                        <FaPlus /> Add Food
+                        {isAdding ? (
+                            <>
+                                <span className="loading loading-spinner loading-sm"></span> Adding...
+                            </>
+                        ) : (
+                            <>
+                                <FaPlus /> Add Food
+                            </>
+                        )}
                     </button>
                 </div>
             </form>

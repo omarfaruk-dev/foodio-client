@@ -4,12 +4,16 @@ import './index.css'
 import { RouterProvider } from 'react-router'
 import router from './Routes/router'
 import AuthProvider from './contexts/AuthProvider'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </Provider>
   </StrictMode>,
 )

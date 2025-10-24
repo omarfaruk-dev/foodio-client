@@ -16,6 +16,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 // import MyOrders from "../pages/MyOrders/MyOrders";
 import OrdersFromApi from "../pages/MyOrders/OrdersFromApi";
+import Wishlist from "../pages/Wishlist/Wishlist";
 import MyFoodsFromApi from "../pages/MyFoods/MyFoodsFromApi";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
@@ -67,6 +68,15 @@ const router = createBrowserRouter([
           <PrivateRoutes>
             {" "}
             <OrdersFromApi />{" "}
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "wishlist",
+        element: (
+          <PrivateRoutes>
+            {" "}
+            <Wishlist />{" "}
           </PrivateRoutes>
         ),
       },

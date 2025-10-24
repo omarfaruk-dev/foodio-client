@@ -2,9 +2,11 @@ import React from 'react';
 import HeroSlider from './HeroSlider';
 import TopFoods from './TopFoods';
 import HowItWorks from './HowItWorks';
-// import CallToAction from './CallToAction';
 import DeviceSupport from './DeviceSupport';
 import CustomerReview from './CustomerReview';
+import WhyChooseFoodio from './WhyChooseFoodio';
+import GetStartedToday from './GetStartedToday';
+import FAQ from './FAQ';
 
 const Home = () => {
     return (
@@ -16,16 +18,22 @@ const Home = () => {
                 <TopFoods />
             </section>
             <section>
+                <WhyChooseFoodio />
+            </section>
+            <section>
                 <DeviceSupport/>
             </section>
             <section>
                 <HowItWorks/>
             </section>
-            {/* <section>
-                <CallToAction/>
-            </section> */}
             <section>
                 <CustomerReview />
+            </section>
+            <section>
+                <GetStartedToday />
+            </section>
+            <section>
+                <FAQ />
             </section>
         </>
     );

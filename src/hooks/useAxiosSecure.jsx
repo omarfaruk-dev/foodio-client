@@ -19,14 +19,13 @@ const useAxiosSecure = () => {
         return response;
     }, 
     error => {
-        console.log(error)
         if (error.status === 401 || error.status === 403) {
             logOut()
                 .then(() => {
-                    console.log('sign out user for 401 status code')
+                    // User logged out due to unauthorized access
                 })
                 .catch(err => {
-                    console.log(err)
+                    console.error('Logout error:', err);
                 })
         }
         return Promise.reject(error)

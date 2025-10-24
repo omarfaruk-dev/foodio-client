@@ -1,28 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme, setTheme } from '../store/slices/themeSlice';
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      // First check for saved theme
-      const savedTheme = localStorage.getItem('foodio-theme');
-      if (savedTheme) {
-        return savedTheme;
-      }
-      
-      // If no saved theme, check system preference
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      return systemTheme;
-    }
-    return 'light';
-  });
+  // Redux theme state
+  const theme = useSelector((state) => state.theme.mode);
+  const dispatch = useDispatch();
 
+  // Initial theme set (first load time)
   useEffect(() => {
     document.documentElement.removeAttribute('data-theme');
     document.body.removeAttribute('data-theme');
     document.body.setAttribute('data-theme', theme);
     document.body.style.colorScheme = theme;
-    localStorage.setItem('foodio-theme', theme);
   }, [theme]);
 
   // Listen for system theme changes
@@ -33,22 +24,23 @@ const ThemeToggle = () => {
       // Only update if user hasn't manually set a theme
       const savedTheme = localStorage.getItem('foodio-theme');
       if (!savedTheme) {
-        setTheme(e.matches ? 'dark' : 'light');
+        dispatch(setTheme(e.matches ? 'dark' : 'light'));
       }
     };
 
     mediaQuery.addEventListener('change', handleSystemThemeChange);
     
     return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
-  }, []);
+  }, [dispatch]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+  // Redux action dispatch 
+  const handleToggle = () => {
+    dispatch(toggleTheme());
   };
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className="btn btn-secondary btn-outline btn-sm rounded-full shadow flex items-center justify-center px-3 py-2"
       aria-label="Toggle dark mode"
       title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}

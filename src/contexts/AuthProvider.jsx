@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from './AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setLoading, logout } from '../store/slices/authSlice';
 
 const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider();
-
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true)
+    
+    // Redux state
+    const dispatch = useDispatch();
+    const { user, loading } = useSelector((state) => state.auth);
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -30,26 +33,44 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     };
 
-
+    // Firebase auth state observer - updates Redux
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false)
+        dispatch(setLoading(true)); // Start loading
+        
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                // Get Firebase ID token and store it
+                try {
+                    const token = await currentUser.getIdToken();
+                    localStorage.setItem('foodio-token', token);
+                } catch (error) {
+                    console.error('Token error:', error);
+                }
+            } else {
+                localStorage.removeItem('foodio-token');
+            }
+            
+            // Update Redux state
+            dispatch(setUser(currentUser));
         })
+        
         return () => {
-            unsubscribe;
+            unsubscribe();
         }
-    }, [])
+    }, [dispatch])
 
     const authData = {
         user,
-        setUser,
+        setUser: (userData) => dispatch(setUser(userData)),
         createUser,
         loginUser,
         googleSignIn,
-        logOut,
+        logOut: () => {
+            logOut();
+            dispatch(logout());
+        },
         loading,
-        setLoading,
+        setLoading: (value) => dispatch(setLoading(value)),
         updateUser,
     }
 

@@ -18,12 +18,20 @@ import useAuth from "../../hooks/useAuth";
 import ThemeToggle from "../../components/ThemeToggle";
 import { IoLogOutOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { useGetWishlistQuery } from "../../store/api/wishlistApi";
+import { FaHeart } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
+  
+  
+  // Get wishlist count
+  const { data: wishlistItems = [] } = useGetWishlistQuery(user?.email, {
+    skip: !user?.email,
+  });
   const handleLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -117,20 +125,29 @@ const NavBar = () => {
               <>
                 <div className="relative">
                   <button
-                    className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-1 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
+                    className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-0.5 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
                     onClick={() => setUserMenuOpen((prev) => !prev)}
                   >
-                    {user.photoURL ? (
+                    {user?.photoURL && user.photoURL.trim() !== '' ? (
                       <img
                         src={user.photoURL}
-                        className="w-8 h-8 p-1 rounded-full"
+                        alt={user.displayName || "User Avatar"}
+                        className="w-8 h-8 rounded-full object-cover border border-secondary/20"
+                        crossOrigin="anonymous"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
                       />
-                    ) : (
-                      <FaUser className="w-8 h-8 p-1 text-secondary" />
-                    )}
+                    ) : null}
+                    <FaUser 
+                      className="w-8 h-8 p-1 text-secondary"
+                      style={{ display: user?.photoURL && user.photoURL.trim() !== '' ? 'none' : 'flex' }}
+                    />
                   </button>
                   <div
-                    className={`absolute -right-12 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${
+                    className={`absolute -right-2 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${
                       userMenuOpen
                         ? "opacity-100 scale-100 pointer-events-auto visible"
                         : "opacity-0 scale-95 pointer-events-none invisible"
@@ -139,10 +156,25 @@ const NavBar = () => {
                     aria-hidden={!userMenuOpen}
                   >
                     <div className="flex flex-col items-center justify-between px-4 py-2 border-b border-dashed border-secondary/20">
-                      <img
-                        src={user?.photoURL}
-                        className="w-14 p-1 border-2 border-secondary/30 rounded-full"
-                      />
+                      {user?.photoURL && user.photoURL.trim() !== '' ? (
+                        <img
+                          src={user.photoURL}
+                          alt={user.displayName || "User Avatar"}
+                          className="w-14 h-14 border-2 border-secondary/30 rounded-full object-cover"
+                          crossOrigin="anonymous"
+                          referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                      ) : null}
+                      <div 
+                        className="w-14 h-14 border-2 border-secondary/30 rounded-full flex items-center justify-center bg-secondary/10"
+                        style={{ display: user?.photoURL && user.photoURL.trim() !== '' ? 'none' : 'flex' }}
+                      >
+                        <FaUser className="text-secondary text-xl" />
+                      </div>
                       <div
                         className="px-4 py-2 font-semibold text-secondary"
                         onClick={() => setUserMenuOpen(false)}
@@ -178,6 +210,18 @@ const NavBar = () => {
                       onClick={() => setUserMenuOpen(false)}
                     >
                       <FaListOl className="mr-2" /> My Orders
+                    </NavLink>
+                    <NavLink
+                      to="/wishlist"
+                      className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary relative"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      <FaHeart className="mr-2" /> Wishlist
+                      {wishlistItems.length > 0 && (
+                        <span className="ml-auto bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                          {wishlistItems.length}
+                        </span>
+                      )}
                     </NavLink>
                     <button
                       onClick={() => {

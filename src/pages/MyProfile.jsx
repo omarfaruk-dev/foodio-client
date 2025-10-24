@@ -17,16 +17,24 @@ const MyProfile = () => {
             </Link>
             <div className=" py-10 px-4 md:px-6 bg-secondary/5 rounded-md shadow-md border border-secondary/20">
                 <div className="flex flex-col items-center gap-4">
-                    {user?.photoURL ? (
+                    {user?.photoURL && user.photoURL.trim() !== '' ? (
                         <img
-                            src={user?.photoURL}
+                            src={user.photoURL}
                             alt={user?.displayName || user?.email}
                             className="w-30 h-30 p-2 rounded-full border-4 border-secondary object-cover shadow"
-                            onError={e => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentNode.querySelector('.fallback-avatar').style.display = 'flex'; }}
+                            crossOrigin="anonymous"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'flex';
+                            }}
                         />
                     ) : null}
                     {/* Fallback Avatar */}
-                    <div className="w-28 h-28 flex items-center justify-center rounded-full border-4 border-secondary text-secondary shadow fallback-avatar" style={{display: user?.photoURL ? 'none' : 'flex'}}>
+                    <div 
+                        className="w-28 h-28 flex items-center justify-center rounded-full border-4 border-secondary text-secondary shadow"
+                        style={{ display: user?.photoURL && user.photoURL.trim() !== '' ? 'none' : 'flex' }}
+                    >
                         <FaUser className="w-16 h-16" />
                     </div>
                     <h2 className="text-2xl font-bold text-primary">{user?.displayName || 'Anonymous User'}</h2>

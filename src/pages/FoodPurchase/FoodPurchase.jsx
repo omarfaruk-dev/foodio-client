@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useCreateOrderMutation } from '../../store/api/ordersApi';
 
 const FoodPurchase = () => {
     const food = useLoaderData();
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    // Form state for order info (no buying date input, use Date.now() in backend)
+    // RTK Query mutation for creating order
+    const [createOrder, { isLoading: isOrdering }] = useCreateOrderMutation();
+
+    // Local form state for order quantity
     const [form, setForm] = useState({
         order_quantity: 1
     });
@@ -26,7 +29,7 @@ const FoodPurchase = () => {
             });
             return;
         }
-        // Send only relevant fields, buying date will be set in backend
+        // Prepare order data
         const purchaseData = {
             foodId: food._id || 'demo-id',
             food_name: food.food_name,
@@ -37,10 +40,12 @@ const FoodPurchase = () => {
             total_price: form.order_quantity * food.price,
             purchase_time: Date.now(), // Add purchase time as timestamp
         };
-        // Example: send to backend (replace with real API call)
-        axios.post(`${import.meta.env.VITE_API_URL}/orders`, purchaseData)
-            .then(res => {  
-                if(res.data.insertedId){
+        
+        // Send to backend using RTK Query mutation
+        createOrder(purchaseData)
+            .unwrap()
+            .then((res) => {  
+                if(res.insertedId){
                     Swal.fire({
                         title: "Purchase Successful!",
                         text: `Your order for ${food.food_name} has been placed successfully!`,
@@ -66,7 +71,7 @@ const FoodPurchase = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Order Failed',
-                    text: err?.response?.data?.message || 'Could not place your order. Please try again.',
+                    text: err?.data?.message || 'Could not place your order. Please try again.',
                     confirmButtonColor: "#3085d6",
                 });
             });
@@ -194,7 +199,19 @@ const FoodPurchase = () => {
                     </div>
                     <div className="mt-8 flex flex-col gap-3">
                         <button type="button" onClick={() => navigate(-1)} className="btn btn-outline btn-secondary rounded-3xl">Go Back</button>
-                        <button type="submit" className="btn btn-secondary rounded-3xl font-semibold text-white px-8 text-lg shadow-lg hover:scale-105 transition-transform duration-200" disabled={food.quantity === 0}>Confirm Purchase</button>
+                        <button 
+                            type="submit" 
+                            disabled={food.quantity === 0 || isOrdering}
+                            className="btn btn-secondary rounded-3xl font-semibold text-white px-8 text-lg shadow-lg hover:scale-105 transition-transform duration-200 disabled:opacity-50"
+                        >
+                            {isOrdering ? (
+                                <>
+                                    <span className="loading loading-spinner loading-sm"></span> Processing...
+                                </>
+                            ) : (
+                                'Confirm Purchase'
+                            )}
+                        </button>
                     </div>
                 </form>
             </div>
