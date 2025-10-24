@@ -53,44 +53,47 @@ const GetStartedToday = () => {
     ];
 
     return (
-        <section className="max-w-7xl mx-auto px-4 pb-8 md:pb-16 lg:pb-24">
-            {/* Header */}
-            <div className="text-center mb-16">
-                <Slide direction="right">
-                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                        Get Started <span className="text-secondary border-b-2 border-secondary">Today</span>
-                    </h2>
-                </Slide>
-                <Slide direction="left">
-                    <p className="text-lg text-accent max-w-3xl mx-auto">
-                        Join thousands of food lovers who are already enjoying delicious meals from Foodio. 
-                        Start your culinary journey in just 3 simple steps!
-                    </p>
-                </Slide>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 pb-8 md:pb-16 lg:pb-24 bg-base-100">
+            <div className="max-w-5xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-8 md:mb-12">
+                    <Slide direction="right">
+                        <h2 className="text-center text-3xl md:text-4xl font-bold text-primary mb-4">
+                            Get Started <span className="text-secondary border-b-2 border-secondary">Today</span>
+                        </h2>
+                    </Slide>
+                    <Slide direction="left">
+                        <p className="text-center text-accent mb-10 max-w-2xl mx-auto">
+                            Join thousands of food lovers who are already enjoying delicious meals from Foodio. 
+                            Start your culinary journey in just 3 simple steps!
+                        </p>
+                    </Slide>
+                </div>
 
-            {/* Steps Section */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                {/* Steps Section */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 {steps.map((step, index) => (
                     <Fade key={index} delay={index * 200}>
-                        <div className={`${step.bgColor} ${step.borderColor} border-2 rounded-2xl p-8 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group relative`}>
+                        <div className={`${step.bgColor} ${step.borderColor} border-2 rounded-2xl p-8 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group relative flex flex-col h-full`}>
                             {/* Step Number */}
                             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-sm group-hover:scale-110 transition-transform duration-700">
                                 {index + 1}
                             </div>
                             
-                            <div className={`${step.color} mb-6 group-hover:scale-110 transition-transform duration-700 flex justify-center`}>
-                                {step.icon}
+                            <div className="flex flex-col h-full">
+                                <div className={`${step.color} mb-6 group-hover:scale-110 transition-transform duration-700 flex justify-center`}>
+                                    {step.icon}
+                                </div>
+                                <h3 className="text-xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-700">{step.title}</h3>
+                                <p className="text-accent leading-relaxed flex-grow">{step.description}</p>
                             </div>
-                            <h3 className="text-xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-700">{step.title}</h3>
-                            <p className="text-accent leading-relaxed">{step.description}</p>
                         </div>
                     </Fade>
                 ))}
             </div>
 
-            {/* Benefits Section */}
-            <div className="bg-gradient-to-r from-secondary/5 via-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 mb-16">
+                {/* Benefits Section */}
+                <div className="bg-gradient-to-r from-secondary/5 via-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 mb-16">
                 <Slide direction="up">
                     <div className="text-center mb-8">
                         <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4">
@@ -105,20 +108,22 @@ const GetStartedToday = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {benefits.map((benefit, index) => (
                         <Fade key={index} delay={index * 100}>
-                            <div className="bg-base-100 rounded-2xl p-6 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group border border-secondary/10">
-                                <div className={`${benefit.color} mb-4 flex justify-center group-hover:scale-110 transition-transform duration-700`}>
-                                    {benefit.icon}
+                            <div className="bg-base-100 rounded-2xl p-6 text-center shadow-md hover:shadow-lg hover:-translate-y-2 duration-700 transition-all group border border-secondary/10 flex flex-col h-full">
+                                <div className="flex flex-col h-full">
+                                    <div className={`${benefit.color} mb-4 flex justify-center group-hover:scale-110 transition-transform duration-700`}>
+                                        {benefit.icon}
+                                    </div>
+                                    <h4 className="text-lg font-bold text-primary mb-2 group-hover:text-secondary transition-colors duration-700">{benefit.title}</h4>
+                                    <p className="text-accent text-sm flex-grow">{benefit.description}</p>
                                 </div>
-                                <h4 className="text-lg font-bold text-primary mb-2 group-hover:text-secondary transition-colors duration-700">{benefit.title}</h4>
-                                <p className="text-accent text-sm">{benefit.description}</p>
                             </div>
                         </Fade>
                     ))}
                 </div>
             </div>
 
-            {/* Call to Action */}
-            <div className="bg-gradient-to-r from-secondary/10 via-primary/5 to-secondary/10 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+                {/* Call to Action */}
+                <div className="bg-gradient-to-r from-secondary/10 via-primary/5 to-secondary/10 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/5 rounded-full -translate-y-20 translate-x-20"></div>
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full translate-y-16 -translate-x-16"></div>
@@ -156,8 +161,9 @@ const GetStartedToday = () => {
                         </div>
                     </div>
                 </Slide>
+                </div>
             </div>
-        </section>
+        </div>
     );
 };
 

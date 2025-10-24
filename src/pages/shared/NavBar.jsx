@@ -137,7 +137,7 @@ const NavBar = () => {
                     )}
                   </button>
                   <div
-                    className={`absolute -right-12 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${
+                    className={`absolute -right-2 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${
                       userMenuOpen
                         ? "opacity-100 scale-100 pointer-events-auto visible"
                         : "opacity-0 scale-95 pointer-events-none invisible"
