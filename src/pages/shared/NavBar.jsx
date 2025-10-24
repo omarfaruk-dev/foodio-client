@@ -18,12 +18,19 @@ import useAuth from "../../hooks/useAuth";
 import ThemeToggle from "../../components/ThemeToggle";
 import { IoLogOutOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { useGetWishlistQuery } from "../../store/api/wishlistApi";
+import { FaHeart } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
+  
+  // Get wishlist count
+  const { data: wishlistItems = [] } = useGetWishlistQuery(user?.email, {
+    skip: !user?.email,
+  });
   const handleLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -178,6 +185,18 @@ const NavBar = () => {
                       onClick={() => setUserMenuOpen(false)}
                     >
                       <FaListOl className="mr-2" /> My Orders
+                    </NavLink>
+                    <NavLink
+                      to="/wishlist"
+                      className="flex items-center w-full px-4 py-2 text-primary hover:translate-x-2 duration-500 hover:text-secondary relative"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      <FaHeart className="mr-2" /> Wishlist
+                      {wishlistItems.length > 0 && (
+                        <span className="ml-auto bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                          {wishlistItems.length}
+                        </span>
+                      )}
                     </NavLink>
                     <button
                       onClick={() => {

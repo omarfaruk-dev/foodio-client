@@ -1,6 +1,81 @@
 import { Link } from 'react-router';
+import { FaHeart } from 'react-icons/fa';
+import useAuth from '../../hooks/useAuth';
+import { useAddToWishlistMutation } from '../../store/api/wishlistApi';
+import Swal from 'sweetalert2';
 
 const FoodCard = ({ item }) => {
+    const { user } = useAuth();
+    const [addToWishlist, { isLoading: isAddingToWishlist }] = useAddToWishlistMutation();
+
+    const handleAddToWishlist = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!user) {
+            Swal.fire({
+                icon: "warning",
+                title: "Login Required",
+                text: "Please login to add items to wishlist!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return;
+        }
+
+        if (item.user_email === user.email) {
+            Swal.fire({
+                icon: "warning",
+                title: "Cannot Add Your Own Food",
+                text: "You cannot add your own food to wishlist!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return;
+        }
+
+        const wishlistData = {
+            foodId: item._id,
+            food_name: item.food_name,
+            food_img: item.food_img,
+            price: item.price,
+            food_origin: item.food_origin,
+            food_category: item.food_category,
+        };
+
+        addToWishlist({ email: user.email, foodData: wishlistData })
+            .unwrap()
+            .then((res) => {
+                if (res.insertedId) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Added to Wishlist!",
+                        text: `${item.food_name} has been added to your wishlist.`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch((error) => {
+                if (error?.data?.message === "Food already in wishlist") {
+                    Swal.fire({
+                        icon: "info",
+                        title: "Already in Wishlist",
+                        text: "This food is already in your wishlist!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Failed to add to wishlist. Please try again.",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            });
+    };
     return (
         <div className="card bg-base-100 border border-secondary/20 shadow-md hover:shadow-lg flex flex-col h-full group hover:-translate-y-2 duration-700 transition-all">
             <figure className="relative">
@@ -39,10 +114,18 @@ const FoodCard = ({ item }) => {
                 <div className="flex flex-wrap gap-3 mt-2 text-xs md:text-sm">
                     {/* Removed available item from here as requested */}
                 </div>
-                <div className="mt-auto pt-2">
-                    <Link to={`/item-details/${item._id}`} className="btn btn-secondary btn-sm w-full font-semibold text-white rounded-3xl">
+                <div className="mt-auto pt-2 flex gap-2">
+                    <Link to={`/item-details/${item._id}`} className="btn btn-secondary btn-sm flex-1 font-semibold text-white rounded-3xl">
                         See Details
                     </Link>
+                    <button
+                        onClick={handleAddToWishlist}
+                        disabled={isAddingToWishlist}
+                        className="btn btn-sm btn-outline btn-error rounded-3xl disabled:opacity-50"
+                        title="Add to wishlist"
+                    >
+                        <FaHeart className="text-lg" />
+                    </button>
                 </div>
             </div>
         </div>
