@@ -8,8 +8,8 @@ import Lottie from 'lottie-react';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { Fade } from 'react-awesome-reveal';
-import { FaHeart, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
 import { MdDeleteForever } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
 
 // Skeleton Loading Component
 const WishlistSkeleton = () => {
@@ -36,7 +36,7 @@ const WishlistSkeleton = () => {
     <div className="max-w-7xl mt-16 min-h-[calc(100vh-300px)] mx-auto px-4 py-8 md:py-16 lg:py-20">
       <Fade>
         <h2 className="text-center text-2xl text-primary md:text-3xl font-bold mb-10">
-          My <span className="text-secondary">Wishlist</span> ❤️
+          My <span className="text-secondary">Wishlist</span> <FaHeart />
         </h2>
       </Fade>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">

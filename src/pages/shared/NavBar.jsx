@@ -27,6 +27,7 @@ const NavBar = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   
+  
   // Get wishlist count
   const { data: wishlistItems = [] } = useGetWishlistQuery(user?.email, {
     skip: !user?.email,
@@ -124,17 +125,26 @@ const NavBar = () => {
               <>
                 <div className="relative">
                   <button
-                    className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-1 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
+                    className="ml-2 bg-base-100 border-2 border-secondary/50 text-primary p-0.5 rounded-full hover:bg-base-100 focus:outline-none flex items-center justify-center"
                     onClick={() => setUserMenuOpen((prev) => !prev)}
                   >
-                    {user.photoURL ? (
+                    {user?.photoURL && user.photoURL.trim() !== '' ? (
                       <img
                         src={user.photoURL}
-                        className="w-8 h-8 p-1 rounded-full"
+                        alt={user.displayName || "User Avatar"}
+                        className="w-8 h-8 rounded-full object-cover border border-secondary/20"
+                        crossOrigin="anonymous"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
                       />
-                    ) : (
-                      <FaUser className="w-8 h-8 p-1 text-secondary" />
-                    )}
+                    ) : null}
+                    <FaUser 
+                      className="w-8 h-8 p-1 text-secondary"
+                      style={{ display: user?.photoURL && user.photoURL.trim() !== '' ? 'none' : 'flex' }}
+                    />
                   </button>
                   <div
                     className={`absolute -right-2 mt-2 w-55 bg-base-100 border border-secondary/20 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out transform ${
@@ -146,10 +156,25 @@ const NavBar = () => {
                     aria-hidden={!userMenuOpen}
                   >
                     <div className="flex flex-col items-center justify-between px-4 py-2 border-b border-dashed border-secondary/20">
-                      <img
-                        src={user?.photoURL}
-                        className="w-14 p-1 border-2 border-secondary/30 rounded-full"
-                      />
+                      {user?.photoURL && user.photoURL.trim() !== '' ? (
+                        <img
+                          src={user.photoURL}
+                          alt={user.displayName || "User Avatar"}
+                          className="w-14 h-14 border-2 border-secondary/30 rounded-full object-cover"
+                          crossOrigin="anonymous"
+                          referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                      ) : null}
+                      <div 
+                        className="w-14 h-14 border-2 border-secondary/30 rounded-full flex items-center justify-center bg-secondary/10"
+                        style={{ display: user?.photoURL && user.photoURL.trim() !== '' ? 'none' : 'flex' }}
+                      >
+                        <FaUser className="text-secondary text-xl" />
+                      </div>
                       <div
                         className="px-4 py-2 font-semibold text-secondary"
                         onClick={() => setUserMenuOpen(false)}
